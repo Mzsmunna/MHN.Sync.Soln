@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37AC814B-F861-418D-B234-689077FBE719}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MHN.Sync.Soln</RootNamespace>
+    <AssemblyName>MHN.Sync.Soln</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.15.0.4\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\SharedMethods.cs" />
+    <Compile Include="Managers\FileRead\MemberFileManager.cs" />
+    <Compile Include="Managers\FileRead\ProspectFileManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\FileGenerate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cerebro.JWTAuthService.Services\Cerebro.JWTAuthService.Services.csproj">
+      <Project>{B422EC73-AE22-45B0-A16B-F353BC314BE1}</Project>
+      <Name>Cerebro.JWTAuthService.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Entity\MHN.Sync.Entity.csproj">
+      <Project>{A6C5CC27-CC8D-4789-8481-A2631C2CC3F8}</Project>
+      <Name>MHN.Sync.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Helper\MHN.Sync.Helper.csproj">
+      <Project>{49921D5D-7EF7-414B-BB22-46FED6970EAE}</Project>
+      <Name>MHN.Sync.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Interface\MHN.Sync.Interface.csproj">
+      <Project>{A1D92462-343D-48BF-9640-D52AF196E477}</Project>
+      <Name>MHN.Sync.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.IOC\MHN.Sync.IOC.csproj">
+      <Project>{9568BF8C-8009-49E0-8DB3-17EDF6008A8E}</Project>
+      <Name>MHN.Sync.IOC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Jobs\MHN.Sync.Jobs.csproj">
+      <Project>{A6C47ABA-889E-4A60-B160-CD6042649698}</Project>
+      <Name>MHN.Sync.Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.ModelView\MHN.Sync.ModelView.csproj">
+      <Project>{544180AB-C26D-432B-BF99-7F09755B5D0E}</Project>
+      <Name>MHN.Sync.ModelView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.MongoInterface\MHN.Sync.MongoInterface.csproj">
+      <Project>{4BEC2595-6F50-4CD8-89BB-598D9B5A0D11}</Project>
+      <Name>MHN.Sync.MongoInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Utility\MHN.Sync.Utility.csproj">
+      <Project>{C816E68A-1E39-4E2E-860B-E146A7AD2DA3}</Project>
+      <Name>MHN.Sync.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
