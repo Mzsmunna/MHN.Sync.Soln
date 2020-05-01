@@ -34,7 +34,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
         int totalDataCount = 0;
 
         private TextReader fileReadableStream = null;
-        private SFTPUtility sFTPUtility;
+        //private SFTPUtility sFTPUtility;
 
         List<MemberModel> memberModelList;
 
@@ -137,27 +137,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 totalDataCount = memberModelList.Count();
                 Result.Message.CustomAppender("Total data : " + totalDataCount);
-
-                #region Called_Delegate_To_Process_Data
-                //foreach (var member in memberModelList)
-                //{
-                //    var id = string.Empty;
-                //    //var prospectMember = JsonConvert.DeserializeObject<MemberMeta>(JsonConvert.SerializeObject(member));
-
-                //    var prospectMember = ConvertToProspectMember(member);
-
-                //    //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                //    id = _prospectMemberRepository.Save(prospectMember);
-
-                //    var memberMeta = ConvertToMemberMeta(member);
-                //    memberMeta.ProspectMemberDataRef = id;
-
-                //    processDataCount++;
-                //    Result.NoOfRecordsProcessed++;
-                //    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                //    _memberRepository.Save(memberMeta);
-                //}
-                #endregion
 
                 WriteLine("Processing the file....");
                 NewJob.DataProcessWithTask(memberModelList, _dataProcessDelegate);

@@ -37,7 +37,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
         int totalDataCount = 0;
 
         private TextReader fileReadableStream = null;
-        private SFTPUtility sFTPUtility;
+        //private SFTPUtility sFTPUtility;
 
         List<ProspectModel> prospectModelList;
 
@@ -71,7 +71,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 stopwatch.Start();
                 FileProcess();
                 stopwatch.Stop();
-                WriteLine("Total Minutes : " + stopwatch.Elapsed.TotalMinutes);
+                WriteLine("\nTotal Minutes : " + stopwatch.Elapsed.TotalMinutes);
                 Result.Message.CustomAppender(Environment.NewLine + "Prospect Member Service ended on " + HelperUtility.GetCurrentTimeInEST());
                 Result.IsSuccess = true;
             }
@@ -144,25 +144,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 totalDataCount = prospectModelList.Count();
 
                 Result.Message.CustomAppender("Total data : " + totalDataCount);
-
-                #region Called_Delegate_To_Process_Data
-                //foreach (var prospect in prospectModelList)
-                //{
-                //    var id = string.Empty;
-
-                //    var prospectMember = ConvertToProspectMember(prospect);
-
-                //    id = _prospectMemberRepository.Save(prospectMember);
-
-                //    var prospectMeta = ConvertToProspectMeta(prospect);
-                //    prospectMeta.ProspectMemberDataRef = id;
-
-                //    processDataCount++;
-                //    Result.NoOfRecordsProcessed++;
-                //    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
-                //    _prospectRepository.Save(prospectMeta);
-                //}
-                #endregion
 
                 WriteLine("Processing the file....");
                 NewJob.DataProcessWithTask(prospectModelList, _dataProcessDelegate);
