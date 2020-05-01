@@ -36,11 +36,14 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private bool isFileExists = false;
         private string fileToSearch = string.Empty;
         int processDataCount = 0;
+        int totalDataCount = 0;
 
         private TextReader fileReadableStream = null;
         private SFTPUtility sFTPUtility;
 
         List<ProspectModel> prospectModelList;
+
+        NewJob.ListDataProcessDelegate<ProspectModel> _dataProcessDelegate;
 
         public ProspectFileManager(IProspectMemberRepository prospectMemberRepository, IProspectRepository prospectRepository, JWTHelperUtility jWTHelperUtility)
         {
@@ -52,6 +55,8 @@ namespace MHN.Sync.Soln.Managers.FileRead
             //sFTPUtility = new SFTPUtility(_jwtHelperUtility, ConstantType.MHN);
 
             prospectModelList = new List<ProspectModel>();
+            //_dataProcessDelegate = new NewJob.StreamDataProcessDelegate(DataProcess);
+            _dataProcessDelegate = new NewJob.ListDataProcessDelegate<ProspectModel>(DataProcess);
         }
         public static void WriteLine(string str)
         {
@@ -136,28 +141,58 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //BlobUtility.DataListUpload<CareplanMailbackViewModel>(careplanMailbackList, BlobConstant.Azure_Connection_String, BlobConstant.MOC_Audit_Container, BlobConstant.Careplan_Mailback, fileToSearch);
 
-                var _totalData = prospectModelList.Count();
-                Result.Message.CustomAppender("Total data : " + _totalData);
+                totalDataCount = prospectModelList.Count();
 
-                foreach (var prospect in prospectModelList)
-                {
-                    var id = string.Empty;
+                Result.Message.CustomAppender("Total data : " + totalDataCount);
 
-                    var prospectMember = ConvertToProspectMember(prospect);
+                #region Called_Delegate_To_Process_Data
+                //foreach (var prospect in prospectModelList)
+                //{
+                //    var id = string.Empty;
 
-                    //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                    id = _prospectMemberRepository.Save(prospectMember);
+                //    var prospectMember = ConvertToProspectMember(prospect);
 
-                    var prospectMeta = ConvertToProspectMeta(prospect);
-                    prospectMeta.ProspectMemberDataRef = id;
+                //    id = _prospectMemberRepository.Save(prospectMember);
 
-                    processDataCount++;
-                    Result.NoOfRecordsProcessed++;
-                    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                    _prospectRepository.Save(prospectMeta);
-                }
+                //    var prospectMeta = ConvertToProspectMeta(prospect);
+                //    prospectMeta.ProspectMemberDataRef = id;
+
+                //    processDataCount++;
+                //    Result.NoOfRecordsProcessed++;
+                //    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
+                //    _prospectRepository.Save(prospectMeta);
+                //}
+                #endregion
+
+                NewJob.DataProcessWithTask(prospectModelList, _dataProcessDelegate);
+
+                //DataProcess(prospectModelList);
 
                 Result.IsSuccess = true;
+            }
+        }
+
+        private void DataProcess(List<ProspectModel> dataList)
+        {
+            WriteLine("Processing the Data....");
+
+            foreach (var prospect in dataList)
+            {
+                var id = string.Empty;
+
+                var prospectMember = ConvertToProspectMember(prospect);
+
+                //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
+                id = _prospectMemberRepository.Save(prospectMember);
+
+                var prospectMeta = ConvertToProspectMeta(prospect);
+                prospectMeta.ProspectMemberDataRef = id;
+
+                processDataCount++;
+                Result.NoOfRecordsProcessed++;
+                Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
+
+                _prospectRepository.Save(prospectMeta);
             }
         }
 
