@@ -30,13 +30,15 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private static StringBuilder output = new StringBuilder();
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private string fileToSearch = string.Empty;
         int processDataCount = 0;
+        int totalDataCount = 0;
 
         private TextReader fileReadableStream = null;
         private SFTPUtility sFTPUtility;
 
         List<MemberModel> memberModelList;
+
+        NewJob.ListDataProcessDelegate<MemberModel> _dataProcessDelegate;
 
         public MemberFileManager(IProspectMemberRepository prospectMemberRepository, IMemberRepository memberRepository, JWTHelperUtility jWTHelperUtility)
         {
@@ -48,6 +50,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
             //sFTPUtility = new SFTPUtility(_jwtHelperUtility, ConstantType.MHN);
 
             memberModelList = new List<MemberModel>();
+            _dataProcessDelegate = new NewJob.ListDataProcessDelegate<MemberModel>(DataProcess);
         }
         public static void WriteLine(string str)
         {
@@ -132,29 +135,60 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //BlobUtility.DataListUpload<CareplanMailbackViewModel>(careplanMailbackList, BlobConstant.Azure_Connection_String, BlobConstant.MOC_Audit_Container, BlobConstant.Careplan_Mailback, fileToSearch);
 
-                var _totalData = memberModelList.Count();
-                Result.Message.CustomAppender("Total data : " + _totalData);
+                totalDataCount = memberModelList.Count();
+                Result.Message.CustomAppender("Total data : " + totalDataCount);
 
-                foreach (var member in memberModelList)
-                {
-                    var id = string.Empty;
-                    //var prospectMember = JsonConvert.DeserializeObject<MemberMeta>(JsonConvert.SerializeObject(member));
+                #region Called_Delegate_To_Process_Data
+                //foreach (var member in memberModelList)
+                //{
+                //    var id = string.Empty;
+                //    //var prospectMember = JsonConvert.DeserializeObject<MemberMeta>(JsonConvert.SerializeObject(member));
 
-                    var prospectMember = ConvertToProspectMember(member);
+                //    var prospectMember = ConvertToProspectMember(member);
 
-                    //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                    id = _prospectMemberRepository.Save(prospectMember);
+                //    //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
+                //    id = _prospectMemberRepository.Save(prospectMember);
 
-                    var memberMeta = ConvertToMemberMeta(member);
-                    memberMeta.ProspectMemberDataRef = id;
+                //    var memberMeta = ConvertToMemberMeta(member);
+                //    memberMeta.ProspectMemberDataRef = id;
 
-                    processDataCount++;
-                    Result.NoOfRecordsProcessed++;
-                    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                    _memberRepository.Save(memberMeta);
-                }
+                //    processDataCount++;
+                //    Result.NoOfRecordsProcessed++;
+                //    Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
+                //    _memberRepository.Save(memberMeta);
+                //}
+                #endregion
+
+                WriteLine("Processing the file....");
+                NewJob.DataProcessWithTask(memberModelList, _dataProcessDelegate);
+
+                //DataProcess(memberModelList);
 
                 Result.IsSuccess = true;
+            }
+        }
+
+        private void DataProcess(List<MemberModel> dataList)
+        {
+            foreach (var member in dataList)
+            {
+                var id = string.Empty;
+                //var prospectMember = JsonConvert.DeserializeObject<MemberMeta>(JsonConvert.SerializeObject(member));
+
+                var prospectMember = ConvertToProspectMember(member);
+
+                //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
+                
+                //id = _prospectMemberRepository.Save(prospectMember);
+
+                var memberMeta = ConvertToMemberMeta(member);
+                memberMeta.ProspectMemberDataRef = id;
+
+                processDataCount++;
+                Result.NoOfRecordsProcessed++;
+                Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
+                
+                //_memberRepository.Save(memberMeta);
             }
         }
 

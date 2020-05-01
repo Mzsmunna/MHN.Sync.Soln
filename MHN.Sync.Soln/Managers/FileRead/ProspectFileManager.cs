@@ -33,8 +33,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private static StringBuilder output = new StringBuilder();
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private bool isFileExists = false;
-        private string fileToSearch = string.Empty;
         int processDataCount = 0;
         int totalDataCount = 0;
 
@@ -55,14 +53,15 @@ namespace MHN.Sync.Soln.Managers.FileRead
             //sFTPUtility = new SFTPUtility(_jwtHelperUtility, ConstantType.MHN);
 
             prospectModelList = new List<ProspectModel>();
-            //_dataProcessDelegate = new NewJob.StreamDataProcessDelegate(DataProcess);
             _dataProcessDelegate = new NewJob.ListDataProcessDelegate<ProspectModel>(DataProcess);
         }
+
         public static void WriteLine(string str)
         {
             Console.WriteLine(str);
             output.AppendLine(str);
         }
+
         public JobManagerResult Execute()
         {
             try
@@ -86,6 +85,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                     //TelemetryLogger.LogException(ex);
                 }
             }
+
             return Result;
         }
 
@@ -164,6 +164,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 //}
                 #endregion
 
+                WriteLine("Processing the file....");
                 NewJob.DataProcessWithTask(prospectModelList, _dataProcessDelegate);
 
                 //DataProcess(prospectModelList);
@@ -174,8 +175,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
         private void DataProcess(List<ProspectModel> dataList)
         {
-            WriteLine("Processing the Data....");
-
             foreach (var prospect in dataList)
             {
                 var id = string.Empty;
@@ -183,7 +182,8 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 var prospectMember = ConvertToProspectMember(prospect);
 
                 //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
-                id = _prospectMemberRepository.Save(prospectMember);
+
+                //id = _prospectMemberRepository.Save(prospectMember);
 
                 var prospectMeta = ConvertToProspectMeta(prospect);
                 prospectMeta.ProspectMemberDataRef = id;
@@ -192,7 +192,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Result.NoOfRecordsProcessed++;
                 Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
 
-                _prospectRepository.Save(prospectMeta);
+                //_prospectRepository.Save(prospectMeta);
             }
         }
 

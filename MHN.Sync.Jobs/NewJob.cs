@@ -115,33 +115,46 @@ namespace MHN.Sync.Jobs
             //DataProcessWithTask<T1>(dataList);
         }
 
-        public static void DataProcessWithTask<T>(List<T> dataList, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
+        public static void DataProcessWithTask<T>(List<T> fullDataList, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
         {
-            int taskDivide = dataList.Count / 10;
-            var task1List = dataList.GetRange(taskDivide * 0, taskDivide);
-            var task2List = dataList.GetRange(taskDivide * 1, taskDivide);
-            var task3List = dataList.GetRange(taskDivide * 2, taskDivide);
-            var task4List = dataList.GetRange(taskDivide * 3, taskDivide);
-            var task5List = dataList.GetRange(taskDivide * 4, taskDivide);
-            var task6List = dataList.GetRange(taskDivide * 5, taskDivide);
-            var task7List = dataList.GetRange(taskDivide * 6, taskDivide);
-            var task8List = dataList.GetRange(taskDivide * 7, taskDivide);
-            var task9List = dataList.GetRange(taskDivide * 8, taskDivide);
-            int lastTaskCount = dataList.Count - taskDivide * 9;
-            var task10List = dataList.GetRange(taskDivide * 9, lastTaskCount);
+            if(fullDataList.Count > 0 && DataProcessDelegate != null)
+            {
+                int taskDivide = fullDataList.Count / 10;
+                var task1List = fullDataList.GetRange(taskDivide * 0, taskDivide);
+                var task2List = fullDataList.GetRange(taskDivide * 1, taskDivide);
+                var task3List = fullDataList.GetRange(taskDivide * 2, taskDivide);
+                var task4List = fullDataList.GetRange(taskDivide * 3, taskDivide);
+                var task5List = fullDataList.GetRange(taskDivide * 4, taskDivide);
+                var task6List = fullDataList.GetRange(taskDivide * 5, taskDivide);
+                var task7List = fullDataList.GetRange(taskDivide * 6, taskDivide);
+                var task8List = fullDataList.GetRange(taskDivide * 7, taskDivide);
+                var task9List = fullDataList.GetRange(taskDivide * 8, taskDivide);
+                int lastTaskCount = fullDataList.Count - taskDivide * 9;
+                var task10List = fullDataList.GetRange(taskDivide * 9, lastTaskCount);
 
-            var task1 = Task.Factory.StartNew(() => { DataProcessDelegate(task1List); });
-            var task2 = Task.Factory.StartNew(() => { DataProcessDelegate(task2List); });
-            var task3 = Task.Factory.StartNew(() => { DataProcessDelegate(task3List); });
-            var task4 = Task.Factory.StartNew(() => { DataProcessDelegate(task4List); });
-            var task5 = Task.Factory.StartNew(() => { DataProcessDelegate(task5List); });
-            var task6 = Task.Factory.StartNew(() => { DataProcessDelegate(task6List); });
-            var task7 = Task.Factory.StartNew(() => { DataProcessDelegate(task7List); });
-            var task8 = Task.Factory.StartNew(() => { DataProcessDelegate(task8List); });
-            var task9 = Task.Factory.StartNew(() => { DataProcessDelegate(task9List); });
-            var task10 = Task.Factory.StartNew(() => { DataProcessDelegate(task10List); });
+                var task1 = Task.Factory.StartNew(() => { DataProcessDelegate(task1List); });
+                var task2 = Task.Factory.StartNew(() => { DataProcessDelegate(task2List); });
+                var task3 = Task.Factory.StartNew(() => { DataProcessDelegate(task3List); });
+                var task4 = Task.Factory.StartNew(() => { DataProcessDelegate(task4List); });
+                var task5 = Task.Factory.StartNew(() => { DataProcessDelegate(task5List); });
+                var task6 = Task.Factory.StartNew(() => { DataProcessDelegate(task6List); });
+                var task7 = Task.Factory.StartNew(() => { DataProcessDelegate(task7List); });
+                var task8 = Task.Factory.StartNew(() => { DataProcessDelegate(task8List); });
+                var task9 = Task.Factory.StartNew(() => { DataProcessDelegate(task9List); });
+                var task10 = Task.Factory.StartNew(() => { DataProcessDelegate(task10List); });
 
-            Task.WaitAll(task1, task2, task3, task4, task5, task6, task7, task8, task9, task10);
+                Task.WaitAll(task1, task2, task3, task4, task5, task6, task7, task8, task9, task10);
+
+
+            }
+            else if(fullDataList.Count <= 0)
+            {
+                Console.WriteLine("No data available to process");
+            }
+            else if(DataProcessDelegate == null)
+            {
+                Console.WriteLine("Delegate Method reference is null");
+            }
         }
     }
 }
