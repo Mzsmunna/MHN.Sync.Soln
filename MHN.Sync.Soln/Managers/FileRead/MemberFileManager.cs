@@ -30,7 +30,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private static StringBuilder output = new StringBuilder();
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private bool isFileExists = false;
         private string fileToSearch = string.Empty;
         int processDataCount = 0;
 

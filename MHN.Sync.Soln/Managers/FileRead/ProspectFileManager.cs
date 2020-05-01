@@ -98,43 +98,29 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
         private void AutomatedProcess()
         {
-            //fileToSearch = HelperUtility.GenerateFileName(MocSyncType.MOC_Careplan_Mailback);
-            Result.Message.CustomAppender("Searching filename: " + fileToSearch);
-            //var contentIdentifier = ApplicationConstants.Get<string>(ConstantType.MHN);
             var contentIdentifier = string.Empty;
+            //fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result);
+            //fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result, sFTPUtility);
 
-            isFileExists = sFTPUtility.FileExistsInFtps(contentIdentifier, fileToSearch);
-            Result.IsSearchedFileFound = isFileExists;
+            //isFileExists = Result.IsSearchedFileFound.Value;
 
-            if (isFileExists)
+            if (fileReadableStream != null)
             {
-                fileReadableStream = sFTPUtility.DownloadFile(contentIdentifier, fileToSearch);
                 FileProcess(fileReadableStream);
             }
-            else
-                Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
+            //else
+            //    Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
         }
 
         private void ManualProcess()
         {
-            Console.WriteLine("Provide file location with filename: ");
-            string location = Console.ReadLine();
+            fileReadableStream = NewJob.ManualProcess(Result);
 
-            if (!string.IsNullOrEmpty(location))
+            if (fileReadableStream != null)
             {
-                isFileExists = true;
-                fileToSearch = location.Split('\\').LastOrDefault();
-                var fileStream = File.ReadAllText(location);
-                fileReadableStream = new StringReader(fileStream);
                 FileProcess(fileReadableStream);
             }
-            else
-            {
-                Result.IsSuccess = false;
-                WriteLine("No File Found");
-            }
         }
-
 
         private void FileProcess(TextReader fileReadableStream)
         {
