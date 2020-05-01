@@ -96,14 +96,10 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private void AutomatedProcess()
         {
             var contentIdentifier = string.Empty;
-            fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result);
-            fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result, sFTPUtility);
+            //fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result);
+            //fileReadableStream = NewJob.AutomatedProcess(contentIdentifier, fileToSearch, Result, sFTPUtility);
 
-            //fileToSearch = HelperUtility.GenerateFileName(MocSyncType.MOC_Careplan_Mailback);
-            Result.Message.CustomAppender("Searching filename: " + fileToSearch);
-            //var contentIdentifier = ApplicationConstants.Get<string>(ConstantType.MHN);
-
-            isFileExists = Result.IsSearchedFileFound.Value;
+            //isFileExists = Result.IsSearchedFileFound.Value;
 
             if (fileReadableStream != null)
             {
@@ -115,21 +111,11 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
         private void ManualProcess()
         {
-            Console.WriteLine("Provide file location with filename: ");
-            string location = Console.ReadLine();
+            fileReadableStream = NewJob.ManualProcess(Result);
 
-            if (!string.IsNullOrEmpty(location))
+            if (fileReadableStream != null)
             {
-                isFileExists = true;
-                fileToSearch = location.Split('\\').LastOrDefault();
-                var fileStream = File.ReadAllText(location);
-                fileReadableStream = new StringReader(fileStream);
                 FileProcess(fileReadableStream);
-            }
-            else
-            {
-                Result.IsSuccess = false;
-                WriteLine("No File Found");
             }
         }
 
