@@ -12,6 +12,8 @@ namespace MHN.Sync.Utility.CSV
 {
     public static class CsvUtility
     {
+        #region With_Class_Map
+
         public static List<T1> ReadDataFromFile<T1, T2>(string fileLocation, char delimiter, bool validateHeader) where T1 : class //new()
                                                                             where T2 : ClassMap<T1>//, new()
         {
@@ -56,9 +58,57 @@ namespace MHN.Sync.Utility.CSV
                 List<T1> csvResult = csv.GetRecords<T1>().ToList();
 
                 return csvResult;
-
             }
-        }       
+        }
+
+        #endregion
+
+        #region Without_Class_Map
+
+        public static List<T> ReadDataFromFile<T>(string fileLocation, char delimiter, bool validateHeader) where T : class //new()                                                                           
+        {
+            List<T> csvResult = new List<T>();
+
+            using (var reader = new StreamReader(fileLocation))
+            {
+                csvResult = ReadDataFromStream<T>(reader, delimiter, validateHeader);
+            }
+
+            //var fileStream = File.ReadAllText(fileLocation);
+            //using (TextReader reader = new StringReader(fileStream))
+            //{
+            //    csvResult = ReadDataFromTextReader<T>(reader, delimiter, validateHeader);
+            //}
+
+            return csvResult;
+        }
+
+        public static List<T> ReadDataFromStream<T>(StreamReader reader, char delimiter, bool validateHeader) where T : class //new()
+        {
+            List<T> csvResult = ReadDataFromTextReader<T>(reader, delimiter, validateHeader);
+            return csvResult;
+        }
+
+        public static List<T> ReadDataFromTextReader<T>(TextReader reader, char delimiter, bool validateHeader) where T : class //new()
+        {
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csv.Configuration.Delimiter = delimiter.ToString();
+
+                if (!validateHeader)
+                {
+                    csv.Configuration.HeaderValidated = null;
+                }
+
+                csv.Configuration.MissingFieldFound = null;
+                //csv.Configuration.BadDataFound = null;
+                List<T> csvResult = csv.GetRecords<T>().ToList();
+
+                return csvResult;
+            }
+        }
+
+        #endregion
 
         public static bool WriteDataToFile<T>(string fileLocation, char delimiter, List<T> dataList) where T : class
         {          
