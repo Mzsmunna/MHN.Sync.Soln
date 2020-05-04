@@ -19,6 +19,8 @@ namespace MHN.Sync.Jobs
         public delegate void ListDataProcessDelegate<T>(List<T> dataList) where T : class;
         public delegate void DataFetchDelegate(int currentPage, int pageSize);
 
+        public static string delimiter = string.Empty;
+
         public static JobManagerResult GetJobInstance()
         {
             JobManagerResult Result = new JobManagerResult();
@@ -37,20 +39,7 @@ namespace MHN.Sync.Jobs
 
         public static TextReader AutomatedProcess(string contentIdentifier, string fileToSearch, JobManagerResult Result)
         {
-            TextReader fileReadableStream = null;
-            //fileToSearch = HelperUtility.GenerateFileName(MocSyncType.MOC_DoNotCall);
-            Result.Message.CustomAppender("Searching filename: " + fileToSearch);
-            Result.FileLocations.Add(contentIdentifier + "\\" + fileToSearch);
-            Result.FileNames.Add(fileToSearch);
-            //var contentIdentifier = ApplicationConstants.Get<string>(MHNConstantType.ImportMHNContentLocation);
-            Result.IsSearchedFileFound = FtpsUtility.FileExistsInFtps(contentIdentifier, fileToSearch);
-
-            if (Result.IsSearchedFileFound.Value == true)
-            {
-                fileReadableStream = FtpsUtility.DownloadFile(contentIdentifier, fileToSearch);
-            }
-            else
-                Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
+            TextReader fileReadableStream = AutomatedProcess(contentIdentifier, fileToSearch, Result, null);
 
             return fileReadableStream;
         }
@@ -58,20 +47,33 @@ namespace MHN.Sync.Jobs
         public static TextReader AutomatedProcess(string contentIdentifier, string fileToSearch, JobManagerResult Result, SFTPUtility sFTPUtility)
         {
             TextReader fileReadableStream = null;
+
             //fileToSearch = HelperUtility.GenerateFileName(MocSyncType.MOC_Careplan_Mailback);
             Result.Message.CustomAppender("Searching filename: " + fileToSearch);
             Result.FileLocations.Add(contentIdentifier + "\\" + fileToSearch);
             Result.FileNames.Add(fileToSearch);
-            //var contentIdentifier = ApplicationConstants.Get<string>(ConstantType.MHN);
-            Result.IsSearchedFileFound = sFTPUtility.FileExistsInFtps(contentIdentifier, fileToSearch);
 
-            if (Result.IsSearchedFileFound.Value == true)
+            if (sFTPUtility != null)
             {
-                fileReadableStream = sFTPUtility.DownloadFile(contentIdentifier, fileToSearch);
+                //var contentIdentifier = ApplicationConstants.Get<string>(ConstantType.MHN);
+                Result.IsSearchedFileFound = sFTPUtility.FileExistsInFtps(contentIdentifier, fileToSearch);
+
+                if (Result.IsSearchedFileFound.Value == true)
+                    fileReadableStream = sFTPUtility.DownloadFile(contentIdentifier, fileToSearch);
+                else
+                    Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
             }
             else
-                Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
-                
+            {
+                //var contentIdentifier = ApplicationConstants.Get<string>(MHNConstantType.ImportMHNContentLocation);
+                Result.IsSearchedFileFound = FtpsUtility.FileExistsInFtps(contentIdentifier, fileToSearch);
+
+                if (Result.IsSearchedFileFound.Value == true)
+                    fileReadableStream = FtpsUtility.DownloadFile(contentIdentifier, fileToSearch);
+                else
+                    Result.Message.CustomAppender(String.Format("No file found to process. File Name:{0}, Date: {1}", fileToSearch, HelperUtility.GetCurrentTimeInEST()));
+            }
+              
             return fileReadableStream;
         }
 
