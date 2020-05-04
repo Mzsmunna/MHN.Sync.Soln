@@ -20,7 +20,7 @@ namespace MHN.Sync.Jobs
 
         public static char delimiter = '\0';
 
-        private static void CheckDelimiter(string file)
+        private static void SetDelimiter(string file)
         {
             if(delimiter.Equals('\0'))
             {
@@ -68,6 +68,7 @@ namespace MHN.Sync.Jobs
             Result.Message.CustomAppender("Searching filename: " + fileToSearch);
             Result.FileLocations.Add(contentIdentifier + "\\" + fileToSearch);
             Result.FileNames.Add(fileToSearch);
+            SetDelimiter(fileToSearch);
 
             if (sFTPUtility != null)
             {
@@ -102,6 +103,7 @@ namespace MHN.Sync.Jobs
 
             if (!string.IsNullOrEmpty(location))
             {
+                SetDelimiter(location);
                 Result.FileLocations.Add(location);
                 Result.FileNames.Add(location.Split('\\').LastOrDefault());
                 Result.IsSearchedFileFound = true;
@@ -123,7 +125,7 @@ namespace MHN.Sync.Jobs
                                                                                 where T2 : ClassMap<T1>
         {
             TextReader fileReadableStream = ManualProcess(Result);
-            List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, ',', true);
+            List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, delimiter, true);
 
             return dataList;
         }
@@ -131,7 +133,7 @@ namespace MHN.Sync.Jobs
         public static void DataProcessWithTask<T1, T2>(TextReader fileReadableStream, DataProcessDelegate<T1> DataProcessDelegate) where T1 : class
                                                                                         where T2 : ClassMap<T1>
         {
-            List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, ',', true);
+            List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, delimiter, true);
 
             DataProcessWithTask<T1>(dataList, DataProcessDelegate);
         }
@@ -143,14 +145,14 @@ namespace MHN.Sync.Jobs
         public static List<T> ManualProcess<T>(JobManagerResult Result) where T : class
         {
             TextReader fileReadableStream = ManualProcess(Result);
-            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, ',', true);
+            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, delimiter, true);
 
             return dataList;
         }
 
         public static void DataProcessWithTask<T>(TextReader fileReadableStream, DataProcessDelegate<T> DataProcessDelegate) where T : class
         {
-            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, ',', true);
+            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, delimiter, true);
 
             DataProcessWithTask<T>(dataList, DataProcessDelegate);
         }
