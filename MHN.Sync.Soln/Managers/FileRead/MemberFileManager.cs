@@ -38,7 +38,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
         List<MemberModel> memberModelList;
 
-        NewJob.ListDataProcessDelegate<MemberModel> _dataProcessDelegate;
+        NewJob.DataProcessDelegate<MemberModel> _dataProcessDelegate;
 
         public MemberFileManager(IProspectMemberRepository prospectMemberRepository, IMemberRepository memberRepository, JWTHelperUtility jWTHelperUtility)
         {
@@ -50,7 +50,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
             //sFTPUtility = new SFTPUtility(_jwtHelperUtility, ConstantType.MHN);
 
             memberModelList = new List<MemberModel>();
-            _dataProcessDelegate = new NewJob.ListDataProcessDelegate<MemberModel>(DataProcess);
+            _dataProcessDelegate = new NewJob.DataProcessDelegate<MemberModel>(DataProcess);
         }
         public static void WriteLine(string str)
         {

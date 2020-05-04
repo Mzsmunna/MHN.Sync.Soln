@@ -15,11 +15,27 @@ namespace MHN.Sync.Jobs
 {
     public static class NewJob
     {
-        //public delegate void StreamDataProcessDelegate(TextReader fileReadableStream);
-        public delegate void ListDataProcessDelegate<T>(List<T> dataList) where T : class;
+        public delegate void DataProcessDelegate<T>(List<T> dataList) where T : class;
         public delegate void DataFetchDelegate(int currentPage, int pageSize);
 
-        public static string delimiter = string.Empty;
+        public static char delimiter = '\0';
+
+        private static void CheckDelimiter(string file)
+        {
+            if(delimiter.Equals('\0'))
+            {
+                string fitExt = file.Split('.').LastOrDefault();
+
+                if (fitExt.ToLower().Equals("txt"))
+                {
+                    delimiter = '|';
+                }
+                else if (fitExt.ToLower().Equals("csv"))
+                {
+                    delimiter = ',';
+                }
+            }
+        }
 
         public static JobManagerResult GetJobInstance()
         {
@@ -112,7 +128,7 @@ namespace MHN.Sync.Jobs
             return dataList;
         }
 
-        public static void DataProcessWithTask<T1, T2>(TextReader fileReadableStream, ListDataProcessDelegate<T1> DataProcessDelegate) where T1 : class
+        public static void DataProcessWithTask<T1, T2>(TextReader fileReadableStream, DataProcessDelegate<T1> DataProcessDelegate) where T1 : class
                                                                                         where T2 : ClassMap<T1>
         {
             List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, ',', true);
@@ -132,7 +148,7 @@ namespace MHN.Sync.Jobs
             return dataList;
         }
 
-        public static void DataProcessWithTask<T>(TextReader fileReadableStream, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
+        public static void DataProcessWithTask<T>(TextReader fileReadableStream, DataProcessDelegate<T> DataProcessDelegate) where T : class
         {
             List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, ',', true);
 
@@ -141,7 +157,7 @@ namespace MHN.Sync.Jobs
 
         #endregion
 
-        public static void DataProcessWithTask<T>(List<T> fullDataList, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
+        public static void DataProcessWithTask<T>(List<T> fullDataList, DataProcessDelegate<T> DataProcessDelegate) where T : class
         {
             if(fullDataList.Count > 0 && DataProcessDelegate != null)
             {
