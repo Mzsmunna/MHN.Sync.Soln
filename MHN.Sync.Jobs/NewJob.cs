@@ -17,6 +17,7 @@ namespace MHN.Sync.Jobs
     {
         //public delegate void StreamDataProcessDelegate(TextReader fileReadableStream);
         public delegate void ListDataProcessDelegate<T>(List<T> dataList) where T : class;
+        public delegate void DataFetchDelegate(int currentPage, int pageSize);
 
         public static JobManagerResult GetJobInstance()
         {
@@ -98,6 +99,8 @@ namespace MHN.Sync.Jobs
             return fileReadableStream;
         }
 
+        #region CSV-With_Class_Map
+
         public static List<T1> ManualProcess<T1, T2>(JobManagerResult Result) where T1 : class
                                                                                 where T2 : ClassMap<T1>
         {
@@ -107,13 +110,34 @@ namespace MHN.Sync.Jobs
             return dataList;
         }
 
-        public static void DataProcessWithTask<T1, T2>(TextReader fileReadableStream) where T1 : class
+        public static void DataProcessWithTask<T1, T2>(TextReader fileReadableStream, ListDataProcessDelegate<T1> DataProcessDelegate) where T1 : class
                                                                                         where T2 : ClassMap<T1>
         {
             List<T1> dataList = CsvUtility.ReadDataFromTextReader<T1, T2>(fileReadableStream, ',', true);
 
-            //DataProcessWithTask<T1>(dataList);
+            DataProcessWithTask<T1>(dataList, DataProcessDelegate);
         }
+
+        #endregion
+
+        #region CSV-Without_Class_Map
+
+        public static List<T> ManualProcess<T>(JobManagerResult Result) where T : class
+        {
+            TextReader fileReadableStream = ManualProcess(Result);
+            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, ',', true);
+
+            return dataList;
+        }
+
+        public static void DataProcessWithTask<T>(TextReader fileReadableStream, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
+        {
+            List<T> dataList = CsvUtility.ReadDataFromTextReader<T>(fileReadableStream, ',', true);
+
+            DataProcessWithTask<T>(dataList, DataProcessDelegate);
+        }
+
+        #endregion
 
         public static void DataProcessWithTask<T>(List<T> fullDataList, ListDataProcessDelegate<T> DataProcessDelegate) where T : class
         {
@@ -145,7 +169,6 @@ namespace MHN.Sync.Jobs
 
                 Task.WaitAll(task1, task2, task3, task4, task5, task6, task7, task8, task9, task10);
 
-
             }
             else if(fullDataList.Count <= 0)
             {
@@ -155,6 +178,35 @@ namespace MHN.Sync.Jobs
             {
                 Console.WriteLine("Delegate Method reference is null");
             }
+        }
+
+        public static void DataFetchWithTask(int dbCount, DataFetchDelegate DataFetchDelegate)
+        {
+            Console.WriteLine("\rStart getting data count....");
+            //dbCount = memberFulFillmentRepository.CountLastSSBCIMailbackReceiveMembers(ApplicationConstants.ClientId, ApplicationConstants.SSBCIGatewayDileDayRange).Result;
+            //result.Message.CustomAppender("Total Data Count : " + dbCount);
+            if (dbCount > 0)
+            {
+                int pageSize = Convert.ToInt32(ApplicationConstants.DataPullPerRequest);
+                //int loop = totalCount / pageSize;
+
+                int taskDivide = dbCount / 10;
+                var task1 = Task.Factory.StartNew(() => { DataFetchDelegate(0, taskDivide); });
+                var task2 = Task.Factory.StartNew(() => { DataFetchDelegate(1, taskDivide); });
+                var task3 = Task.Factory.StartNew(() => { DataFetchDelegate(2, taskDivide); });
+                var task4 = Task.Factory.StartNew(() => { DataFetchDelegate(3, taskDivide); });
+                var task5 = Task.Factory.StartNew(() => { DataFetchDelegate(4, taskDivide); });
+                var task6 = Task.Factory.StartNew(() => { DataFetchDelegate(5, taskDivide); });
+                var task7 = Task.Factory.StartNew(() => { DataFetchDelegate(6, taskDivide); });
+                var task8 = Task.Factory.StartNew(() => { DataFetchDelegate(7, taskDivide); });
+                var task9 = Task.Factory.StartNew(() => { DataFetchDelegate(8, taskDivide); });
+                var task10 = Task.Factory.StartNew(() => { DataFetchDelegate(9, taskDivide); });
+                var task11 = Task.Factory.StartNew(() => { DataFetchDelegate(10, taskDivide); });
+
+                Task.WaitAll(task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11);
+
+            }
+            //result.Message.CustomAppender("Total Data Found : " + memberFulFillments.Count);
         }
     }
 }
