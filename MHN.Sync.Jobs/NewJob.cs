@@ -163,6 +163,27 @@ namespace MHN.Sync.Jobs
         {
             if(fullDataList.Count > 0 && DataProcessDelegate != null)
             {
+                //int loop = fullDataList.Count / 100;
+
+                //Task[] tasks = new Task[loop];
+
+                //for (var i = 0; i <= loop; i++)
+                //{
+                //    var taskList = fullDataList.GetRange(loop * i, loop);
+
+                //    if(i == loop)
+                //    {
+                //        int lastCount = fullDataList.Count - loop * i;
+                //        taskList = fullDataList.GetRange(loop * i, lastCount);
+                //    }
+
+                //    var task = Task.Factory.StartNew(() => { DataProcessDelegate(taskList); });
+
+                //    tasks[i] = task;
+                //}
+
+                //Task.WaitAll(tasks);
+
                 int taskDivide = fullDataList.Count / 10;
                 var task1List = fullDataList.GetRange(taskDivide * 0, taskDivide);
                 var task2List = fullDataList.GetRange(taskDivide * 1, taskDivide);
@@ -207,8 +228,20 @@ namespace MHN.Sync.Jobs
             //result.Message.CustomAppender("Total Data Count : " + dbCount);
             if (dbCount > 0)
             {
-                int pageSize = Convert.ToInt32(ApplicationConstants.DataPullPerRequest);
-                //int loop = totalCount / pageSize;
+                //int pageSize = Convert.ToInt32(ApplicationConstants.DataPullPerRequest);
+                //int pageNumber = 0;
+
+                //int loop = dbCount / pageSize;
+
+                //Task[] tasks = new Task[loop];
+
+                //for (var i = 0; i <= loop; i++)
+                //{
+                //    var task = Task.Factory.StartNew(() => { DataFetchDelegate(pageNumber++, pageSize); });
+                //    tasks[i] = task;
+                //}
+
+                //Task.WaitAll(tasks);
 
                 int taskDivide = dbCount / 10;
                 var task1 = Task.Factory.StartNew(() => { DataFetchDelegate(0, taskDivide); });
