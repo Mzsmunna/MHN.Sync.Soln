@@ -26,6 +26,8 @@ namespace MHN.Sync.Entity.MongoEntity
         public DateTime? TermDateOn { get; set; }
         public DateTime? EnrolledOn { get; set; }
         public DateTime? DisEnrolledOn { get; set; }
+        public DateTime? PTC_Date_Stamped { get; set; }
+        public DateTime? PTCExpiredOn { get; set; }
         public bool IsActive { get; set; }
         public DateTime? CreatedOn { get; set; }
 

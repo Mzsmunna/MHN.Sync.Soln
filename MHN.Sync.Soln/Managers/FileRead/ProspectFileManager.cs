@@ -164,7 +164,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / _totalData, processDataCount, _totalData);
 
-                //id = _prospectMemberRepository.Save(prospectMember);
+                id = _prospectMemberRepository.Save(prospectMember);
 
                 var prospectMeta = ConvertToProspectMeta(prospect);
                 prospectMeta.ProspectMemberDataRef = id;
@@ -173,7 +173,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Result.NoOfRecordsProcessed++;
                 Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
 
-                //_prospectRepository.Save(prospectMeta);
+                _prospectRepository.Save(prospectMeta);
             }
         }
 
@@ -202,6 +202,8 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 ProspectId = prospect.ProspectId.ToLower(),
                 //Status = null,
                 Type = prospect.Type.ToLower(),
+                PTCExpiredOn = HelperUtility.GetDateFromString(prospect.PTCExpiredOn),
+                PTC_Date_Stamped = HelperUtility.GetDateFromString(prospect.PTC_Date_Stamped),
 
                 IsMember = false,
                 IsActive = true,
@@ -240,10 +242,8 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 MobileNumber = prospect.MobileNumber.ToLower(),
                 Origin = prospect.Origin.ToLower(),
                 PreferredOutreachDay = prospect.PreferredOutreachDay.ToLower(),
-                PreferredOutreachTime = prospect.PreferredOutreachTime.ToLower(),
-                PTCExpiredOn = HelperUtility.GetDateFromString(prospect.PTCExpiredOn),
-                PTCFilledOn = HelperUtility.GetDateFromString(prospect.PTCFilledOn),
-                PTC_Date_Stamped = HelperUtility.GetDateFromString(prospect.PTC_Date_Stamped),
+                PreferredOutreachTime = prospect.PreferredOutreachTime.ToLower(),               
+                PTCFilledOn = HelperUtility.GetDateFromString(prospect.PTCFilledOn),               
                 SpecificDateNoted = HelperUtility.GetDateFromString(prospect.SpecificDateNoted),
                 Specific_time_or_range_noted = prospect.Specific_time_or_range_noted.ToLower(),
 

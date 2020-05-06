@@ -158,7 +158,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
                 
-                //id = _prospectMemberRepository.Save(prospectMember);
+                id = _prospectMemberRepository.Save(prospectMember);
 
                 var memberMeta = ConvertToMemberMeta(member);
                 memberMeta.ProspectMemberDataRef = id;
@@ -167,7 +167,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Result.NoOfRecordsProcessed++;
                 Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
                 
-                //_memberRepository.Save(memberMeta);
+                _memberRepository.Save(memberMeta);
             }
         }
 

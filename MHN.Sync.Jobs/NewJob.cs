@@ -171,7 +171,7 @@ namespace MHN.Sync.Jobs
                 //{
                 //    var taskList = fullDataList.GetRange(loop * i, loop);
 
-                //    if(i == loop)
+                //    if (i == loop)
                 //    {
                 //        int lastCount = fullDataList.Count - loop * i;
                 //        taskList = fullDataList.GetRange(loop * i, lastCount);

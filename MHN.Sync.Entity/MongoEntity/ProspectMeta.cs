@@ -26,9 +26,9 @@ namespace MHN.Sync.Entity.MongoEntity
         public string Compl_by_Role { get; set; }
         public string Origin { get; set; }
         public string Location { get; set; }
-        public DateTime? PTC_Date_Stamped { get; set; }
+        
         public DateTime? AgentAssignedOn { get; set; }
-        public DateTime? PTCExpiredOn { get; set; }
+        
         public DateTime? LastContactAttemptedOn { get; set; }
         public DateTime? LastContactedOn { get; set; }
         public DateTime? PTCFilledOn { get; set; }
