@@ -145,10 +145,9 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 Result.Message.CustomAppender("Total data : " + totalDataCount);
 
-                WriteLine("Processing the file....");
-                NewJob.DataProcessWithTask(prospectModelList, _dataProcessDelegate);
+                //NewJob.DataProcessWithTask(prospectModelList, _dataProcessDelegate);
 
-                //DataProcess(prospectModelList);
+                DataProcess(prospectModelList);
 
                 Result.IsSuccess = true;
             }
@@ -204,6 +203,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Type = prospect.Type.ToLower(),
                 PTCExpiredOn = HelperUtility.GetDateFromString(prospect.PTCExpiredOn),
                 PTC_Date_Stamped = HelperUtility.GetDateFromString(prospect.PTC_Date_Stamped),
+                IsApplicant = false,
 
                 IsMember = false,
                 IsActive = true,

@@ -23,6 +23,7 @@ namespace MHN.Sync.Entity.MongoEntity
         public string Status { get; set; }
         public string AgentName { get; set; }
         public bool IsMember { get; set; }
+        public bool IsApplicant { get; set; }
         public DateTime? TermDateOn { get; set; }
         public DateTime? EnrolledOn { get; set; }
         public DateTime? DisEnrolledOn { get; set; }

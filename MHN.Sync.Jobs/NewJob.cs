@@ -165,7 +165,7 @@ namespace MHN.Sync.Jobs
             {
                 //int loop = fullDataList.Count / 100;
 
-                //Task[] tasks = new Task[loop];
+                //Task[] tasks = new Task[loop + 1];
 
                 //for (var i = 0; i <= loop; i++)
                 //{
@@ -233,7 +233,7 @@ namespace MHN.Sync.Jobs
 
                 //int loop = dbCount / pageSize;
 
-                //Task[] tasks = new Task[loop];
+                //Task[] tasks = new Task[loop + 1];
 
                 //for (var i = 0; i <= loop; i++)
                 //{

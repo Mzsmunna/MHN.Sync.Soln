@@ -138,10 +138,9 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 totalDataCount = memberModelList.Count();
                 Result.Message.CustomAppender("Total data : " + totalDataCount);
 
-                WriteLine("Processing the file....");
-                NewJob.DataProcessWithTask(memberModelList, _dataProcessDelegate);
+                //NewJob.DataProcessWithTask(memberModelList, _dataProcessDelegate);
 
-                //DataProcess(memberModelList);
+                DataProcess(memberModelList);
 
                 Result.IsSuccess = true;
             }
@@ -200,6 +199,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Gender = member.Gender.ToLower(),
                 //Status = null,
                 TermDateOn = HelperUtility.GetDateFromString(member.TermDateOn),
+                IsApplicant = false,
 
                 IsMember = true,
                 IsActive = true,
