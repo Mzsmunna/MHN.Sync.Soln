@@ -60,6 +60,8 @@
     <Compile Include="MongoEntity\MemberMeta.cs" />
     <Compile Include="MongoEntity\ProspectMember.cs" />
     <Compile Include="MongoEntity\ProspectMeta.cs" />
+    <Compile Include="MongoEntity\PTCRequest.cs" />
+    <Compile Include="MongoEntity\SOARequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RootBrowser.cs" />
     <Compile Include="SQLEntity\IntakeWorkflow.cs" />

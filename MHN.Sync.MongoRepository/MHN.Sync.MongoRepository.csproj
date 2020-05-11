@@ -93,6 +93,8 @@
     <Compile Include="Helper\ExtensionMethod.cs" />
     <Compile Include="Helper\RepositoryHelperUtility.cs" />
     <Compile Include="Helper\Test.cs" />
+    <Compile Include="SOARequestRepository.cs" />
+    <Compile Include="PTCRequestRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProspectMemberRepository.cs" />
