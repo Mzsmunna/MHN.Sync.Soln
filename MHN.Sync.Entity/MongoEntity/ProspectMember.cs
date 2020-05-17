@@ -31,6 +31,14 @@ namespace MHN.Sync.Entity.MongoEntity
         public DateTime? PTCExpiredOn { get; set; }
         public bool IsActive { get; set; }
         public DateTime? CreatedOn { get; set; }
+        public List<MHNAcquisition> AcquisitionList { get; set; }
 
+    }
+
+    public class MHNAcquisition
+    {
+        public string FormType { get; set; }
+        public DateTime FormSubmissionDate { get; set; }
+        public string RequestSubmissionRefId { get; set; }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="BASE\IDatabaseContextContainer.cs" />
     <Compile Include="IMemberRepository.cs" />
     <Compile Include="IProspectMemberRepository.cs" />
+    <Compile Include="IMemberAdditionalRepository.cs" />
     <Compile Include="IProspectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

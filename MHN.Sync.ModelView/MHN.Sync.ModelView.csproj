@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressModel.cs" />
+    <Compile Include="MemberAdditionalModel.cs" />
     <Compile Include="MemberModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProspectModel.cs" />

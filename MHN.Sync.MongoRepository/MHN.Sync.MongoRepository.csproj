@@ -94,6 +94,7 @@
     <Compile Include="Helper\RepositoryHelperUtility.cs" />
     <Compile Include="Helper\Test.cs" />
     <Compile Include="EnrollmentRequestRepository.cs" />
+    <Compile Include="MemberAdditionalRepository.cs" />
     <Compile Include="SOARequestRepository.cs" />
     <Compile Include="PTCRequestRepository.cs" />
     <Compile Include="MemberRepository.cs" />

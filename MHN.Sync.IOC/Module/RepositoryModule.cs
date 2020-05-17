@@ -23,7 +23,7 @@ namespace MHN.Sync.IOC.Module
             Bind<IProspectMemberRepository>().To<ProspectMemberRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
             Bind<IProspectRepository>().To<ProspectRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
             Bind<IMemberRepository>().To<MemberRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
-
+            Bind<IMemberAdditionalRepository>().To<MemberAdditionalRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
 
             Bind(typeof(IRepository<>)).To(typeof(Repository<>));
 

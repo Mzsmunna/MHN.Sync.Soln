@@ -23,6 +23,7 @@ namespace MHN.Sync.Soln
         private static IProspectMemberRepository _prospectMemberRepository;
         private static IProspectRepository _prospectRepository;
         private static IMemberRepository _memberRepository;
+        private static IMemberAdditionalRepository _memberAdditionalRepository;
         private static JWTHelperUtility _jwtHelperUtility;
 
         //private static readonly string BaseAddress = Path.GetDirectoryName(Application.ExecutablePath);
@@ -82,6 +83,7 @@ namespace MHN.Sync.Soln
             _prospectMemberRepository = kernel.Get<IProspectMemberRepository>();
             _prospectRepository = kernel.Get<IProspectRepository>();
             _memberRepository = kernel.Get<IMemberRepository>();
+            _memberAdditionalRepository = kernel.Get<IMemberAdditionalRepository>();
             //_dataSyncReportRepository = kernel.Get<IDataSyncReportRepository>();
             //_dataSyncJobListRepository = kernel.Get<IDataSyncJobListRepository>();
 

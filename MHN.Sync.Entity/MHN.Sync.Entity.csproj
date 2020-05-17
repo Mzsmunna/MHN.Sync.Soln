@@ -58,6 +58,7 @@
     <Compile Include="MongoEntity\EnrollmentRequest.cs" />
     <Compile Include="MongoEntity\IEntity.cs" />
     <Compile Include="JobManagerResult.cs" />
+    <Compile Include="MongoEntity\MemberAdditional.cs" />
     <Compile Include="MongoEntity\MemberMeta.cs" />
     <Compile Include="MongoEntity\ProspectMember.cs" />
     <Compile Include="MongoEntity\ProspectMeta.cs" />
