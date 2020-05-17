@@ -31,7 +31,7 @@ namespace MHN.Sync.Entity.MongoEntity
         public string SocialSecurityNumber { get; set; }
         public string ApplicationID { get; set; }
         public string MedicaidNumber { get; set; }
-        public string MedicaidEligibilityInd { get; set; }
+        //public string MedicaidEligibilityInd { get; set; }
         public string LISStatusInd { get; set; }
         public string LISStartDate { get; set; }
         public string LISEndDate { get; set; }
@@ -175,7 +175,7 @@ namespace MHN.Sync.Entity.MongoEntity
             Map(m => m.CareManagement.HealthRiskCategory).Name("Health Risk Category");
             Map(m => m.CareManagement.PCPName).Name("PCP Name");
             Map(m => m.CareManagement.CMEName).Name("CME Name");
-            Map(m => m.CareManagement.SpecialistProvider).Name("Specialist Provider");
+            Map(m => m.CareManagement.SpecialistProvider).Name("Specialist Provider Name");
 
             //ContactRelated
             Map(m => m.ContactRelated.PermissionToText).Name("Permission To Text");
@@ -204,7 +204,7 @@ namespace MHN.Sync.Entity.MongoEntity
             Map(m => m.RiskActivity.GrievanceDescription1).Name("Grievance Description (1)");
             Map(m => m.RiskActivity.GrievanceOutcome1).Name("Grievance Outcome (1)");
             Map(m => m.RiskActivity.GrievanceDate2).Name("Grievance Date (2)");
-            Map(m => m.RiskActivity.GrievanceSource2).Name("'Grievance Source (2)");
+            Map(m => m.RiskActivity.GrievanceSource2).Name("Grievance Source (2)");
             Map(m => m.RiskActivity.GrievanceDescription2).Name("Grievance Description (2)");
             Map(m => m.RiskActivity.GrievanceOutcome2).Name("Grievance Outcome (2)");
             Map(m => m.RiskActivity.FiledAppealIndicator).Name("Filed Appeal Indicator");
@@ -240,13 +240,13 @@ namespace MHN.Sync.Entity.MongoEntity
             Map(m => m.Medication.MailOrderPharmacyInd).Name("mail_order_pharmacy_ind");
             Map(m => m.Medication.MedAdherenceRate).Name("med_adherence_rate");
             Map(m => m.Medication.GenericUtilizationRate).Name("generic_utilization_rate");
-            Map(m => m.Medication.TakingMedInd).Name("Taking - Med - Ind");
-            Map(m => m.Medication.MedicationNumber1).Name("Medication - Number(1)");
-            Map(m => m.Medication.MedicationName1).Name("Medication - Name(1)");
-            Map(m => m.Medication.MedicationQuantity1).Name("Medication - Quantity(1)");
-            Map(m => m.Medication.MedicationNumber2).Name("Medication - Number(2)");
-            Map(m => m.Medication.MedicationName2).Name("Medication - Name(2)");
-            Map(m => m.Medication.MedicationQuantity2).Name("Medication - Quantity(2)");
+            Map(m => m.Medication.TakingMedInd).Name("Taking-Med-Ind", "Taking-Med-Ind ");
+            Map(m => m.Medication.MedicationNumber1).Name("Medication-Number(1)");
+            Map(m => m.Medication.MedicationName1).Name("Medication-Name(1)", "Medication-Name (1)");
+            Map(m => m.Medication.MedicationQuantity1).Name("Medication-Quantity(1)", "Medication-Quantity (1)");
+            Map(m => m.Medication.MedicationNumber2).Name("Medication-Number(2)");
+            Map(m => m.Medication.MedicationName2).Name("Medication-Name(2)", "Medication-Name (2)");
+            Map(m => m.Medication.MedicationQuantity2).Name("Medication-Quantity(2)", "Medication-Quantity (2)");
          
         }
     }

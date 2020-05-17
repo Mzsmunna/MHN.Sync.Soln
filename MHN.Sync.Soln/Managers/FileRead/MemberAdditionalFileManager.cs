@@ -155,11 +155,11 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //var prospectMember = JsonConvert.DeserializeObject<MemberMeta>(JsonConvert.SerializeObject(member));
 
-                //var prospectMember = ConvertToProspectMember(member);
+                var prospectMember = ConvertToProspectMember(member);
 
                 //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
                 
-                //id = _prospectMemberRepository.Save(prospectMember);
+                id = _prospectMemberRepository.Save(prospectMember);
 
                 var memberAdditional = ConvertToMemberAdditional(member);
                 memberAdditional.ProspectMemberDataRef = id;
@@ -207,12 +207,14 @@ namespace MHN.Sync.Soln.Managers.FileRead
             //    CreatedOn = DateTime.UtcNow,
             //};
 
-            var memberAdditional = JsonConvert.DeserializeObject<MemberAdditional>(JsonConvert.SerializeObject(member));
+            var config = new JsonSerializerSettings { Error = (se, ev) => { ev.ErrorContext.Handled = true; } };
+
+            var memberAdditional = JsonConvert.DeserializeObject<MemberAdditional>(JsonConvert.SerializeObject(member), config);
 
             memberAdditional.OutreachNeededInd = member.OutreachNeededInd.ToLower().StartsWith("t") || member.OutreachNeededInd.Equals("1") ? true : false;
             
             memberAdditional.Supplementary.LISStatusInd = member.Supplementary.LISStatusInd.ToLower().StartsWith("t") || member.Supplementary.LISStatusInd.Equals("1") ? true : false;
-            memberAdditional.Supplementary.MedicaidEligibilityInd = member.Supplementary.MedicaidEligibilityInd.ToLower().StartsWith("t") || member.Supplementary.MedicaidEligibilityInd.Equals("1") ? true : false;
+            //memberAdditional.Supplementary.MedicaidEligibilityInd = member.Supplementary.MedicaidEligibilityInd.ToLower().StartsWith("t") || member.Supplementary.MedicaidEligibilityInd.Equals("1") ? true : false;
             memberAdditional.Supplementary.LISStartDate = HelperUtility.GetDateFromString(member.Supplementary.LISStartDate);
             memberAdditional.Supplementary.LISEndDate = HelperUtility.GetDateFromString(member.Supplementary.LISEndDate);
            
