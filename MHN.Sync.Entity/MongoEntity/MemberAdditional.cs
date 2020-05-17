@@ -54,7 +54,7 @@ namespace MHN.Sync.Entity.MongoEntity
 
     public class ContactRelated
     {
-        public string PermissionToText { get; set; }
+        public bool? PermissionToText { get; set; }
         public DateTime? PermissionToTextDate { get; set; }
         public DateTime? TextOptOutDate { get; set; }
         public string EmailAddress { get; set; }
@@ -75,14 +75,14 @@ namespace MHN.Sync.Entity.MongoEntity
 
     public class RiskActivity
     {
-        public string DisEnrollmentRequest { get; set; }
+        public bool? DisEnrollmentRequest { get; set; }
         public DateTime? DisEnrollmentRequestDate { get; set; }
         public string DisEnrollmentRequestReason { get; set; }
         public DateTime? DisEnrollmentEffectiveDate { get; set; }
         public bool? LEPInd { get; set; }
         public string LEPAmount { get; set; }
         public DateTime? LEPLetterSentDate { get; set; }
-        public string FiledGrievanceIndicator { get; set; }
+        public bool? FiledGrievanceIndicator { get; set; }
         public string GrievanceDate1 { get; set; }
         public string GrievanceSource1 { get; set; }
         public string GrievanceDescription1 { get; set; }
@@ -91,7 +91,7 @@ namespace MHN.Sync.Entity.MongoEntity
         public string GrievanceSource2 { get; set; }
         public string GrievanceDescription2 { get; set; }
         public string GrievanceOutcome2 { get; set; }
-        public string FiledAppealIndicator { get; set; }
+        public bool? FiledAppealIndicator { get; set; }
         public DateTime? AppealDate { get; set; }
         public string AppealType { get; set; }
         public string AppealDescription { get; set; }
@@ -110,12 +110,12 @@ namespace MHN.Sync.Entity.MongoEntity
 
     public class BenefitsActivity
     {
-        public string FoodRecipientInd { get; set; }
+        public bool? FoodRecipientInd { get; set; }
         public string NumberOfMealsProvided { get; set; }
-        public string FitnessUseIndicator { get; set; }
+        public bool? FitnessUseIndicator { get; set; }
         public string FitnessLocationName { get; set; }
         public OTC OTCInfo { get; set; }
-        public string TransportationUseIndicator { get; set; }
+        public bool? TransportationUseIndicator { get; set; }
         public string NumberOfRidesUtilized { get; set; }
     }
 

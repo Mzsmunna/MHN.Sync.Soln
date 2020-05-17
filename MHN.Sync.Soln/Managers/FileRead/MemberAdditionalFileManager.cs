@@ -198,6 +198,12 @@ namespace MHN.Sync.Soln.Managers.FileRead
             return prospectMember;
         }
 
+        private bool ConvertToBool(string value)
+        {
+            bool trueOrFalse = value.ToLower().StartsWith("t") || value.ToLower().StartsWith("y") || value.Equals("1") ? true : false;
+            return trueOrFalse;
+        }
+
         private MemberAdditional ConvertToMemberAdditional(MemberAdditionalModel member)
         {
             //MemberAdditional memberAdditional = new MemberAdditional
@@ -211,38 +217,46 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
             var memberAdditional = JsonConvert.DeserializeObject<MemberAdditional>(JsonConvert.SerializeObject(member), config);
 
-            memberAdditional.OutreachNeededInd = member.OutreachNeededInd.ToLower().StartsWith("t") || member.OutreachNeededInd.Equals("1") ? true : false;
+            memberAdditional.OutreachNeededInd = ConvertToBool(member.OutreachNeededInd);
             
-            memberAdditional.Supplementary.LISStatusInd = member.Supplementary.LISStatusInd.ToLower().StartsWith("t") || member.Supplementary.LISStatusInd.Equals("1") ? true : false;
-            //memberAdditional.Supplementary.MedicaidEligibilityInd = member.Supplementary.MedicaidEligibilityInd.ToLower().StartsWith("t") || member.Supplementary.MedicaidEligibilityInd.Equals("1") ? true : false;
+            memberAdditional.Supplementary.LISStatusInd = ConvertToBool(member.Supplementary.LISStatusInd);
+            //memberAdditional.Supplementary.MedicaidEligibilityInd = ConvertToBool(member.Supplementary.MedicaidEligibilityInd);
             memberAdditional.Supplementary.LISStartDate = HelperUtility.GetDateFromString(member.Supplementary.LISStartDate);
             memberAdditional.Supplementary.LISEndDate = HelperUtility.GetDateFromString(member.Supplementary.LISEndDate);
            
             memberAdditional.CareManagement.LastHRADate = HelperUtility.GetDateFromString(member.CareManagement.LastHRADate);
             memberAdditional.CareManagement.HRADueDate = HelperUtility.GetDateFromString(member.CareManagement.HRADueDate);
-            memberAdditional.CareManagement.CareGapInd = member.CareManagement.CareGapInd.ToLower().StartsWith("t") || member.CareManagement.CareGapInd.Equals("1") ? true : false;
+            memberAdditional.CareManagement.CareGapInd = ConvertToBool(member.CareManagement.CareGapInd);
 
+            memberAdditional.ContactRelated.PermissionToText = ConvertToBool(member.ContactRelated.PermissionToText);
             memberAdditional.ContactRelated.PermissionToTextDate = HelperUtility.GetDateFromString(member.ContactRelated.PermissionToTextDate);
             memberAdditional.ContactRelated.TextOptOutDate = HelperUtility.GetDateFromString(member.ContactRelated.TextOptOutDate);
 
+            memberAdditional.RiskActivity.DisEnrollmentRequest = ConvertToBool(member.RiskActivity.DisEnrollmentRequest);
             memberAdditional.RiskActivity.DisEnrollmentRequestDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentRequestDate);
             memberAdditional.RiskActivity.DisEnrollmentEffectiveDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentEffectiveDate);
-            memberAdditional.RiskActivity.LEPInd = member.RiskActivity.LEPInd.ToLower().StartsWith("t") || member.RiskActivity.LEPInd.Equals("1") ? true : false;
+            memberAdditional.RiskActivity.LEPInd = ConvertToBool(member.RiskActivity.LEPInd);
             memberAdditional.RiskActivity.LEPLetterSentDate = HelperUtility.GetDateFromString(member.RiskActivity.LEPLetterSentDate);
+            memberAdditional.RiskActivity.FiledGrievanceIndicator = ConvertToBool(member.RiskActivity.FiledGrievanceIndicator);
+            memberAdditional.RiskActivity.FiledAppealIndicator = ConvertToBool(member.RiskActivity.FiledAppealIndicator);
             memberAdditional.RiskActivity.AppealDate = HelperUtility.GetDateFromString(member.RiskActivity.AppealDate);
 
+            memberAdditional.InteractionHistory.WelcomeCallMadeInd = ConvertToBool(member.InteractionHistory.WelcomeCallMadeInd);
             memberAdditional.InteractionHistory.WelcomeCallDate = HelperUtility.GetDateFromString(member.InteractionHistory.WelcomeCallDate);
             memberAdditional.InteractionHistory.MbrNotesDate = HelperUtility.GetDateFromString(member.InteractionHistory.MbrNotesDate);
 
-            memberAdditional.BenefitsActivity.OTCInfo.CardActivated = member.BenefitsActivity.OTCInfo.CardActivated.ToLower().StartsWith("t") || member.BenefitsActivity.OTCInfo.CardActivated.Equals("1") ? true : false;
+            memberAdditional.BenefitsActivity.FoodRecipientInd = ConvertToBool(member.BenefitsActivity.FoodRecipientInd);
+            memberAdditional.BenefitsActivity.FitnessUseIndicator = ConvertToBool(member.BenefitsActivity.FitnessUseIndicator);
+            memberAdditional.BenefitsActivity.OTCInfo.CardActivated = ConvertToBool(member.BenefitsActivity.OTCInfo.CardActivated);
             memberAdditional.BenefitsActivity.OTCInfo.ActivationDate = HelperUtility.GetDateFromString(member.BenefitsActivity.OTCInfo.ActivationDate);
             memberAdditional.BenefitsActivity.OTCInfo.MailDate = HelperUtility.GetDateFromString(member.BenefitsActivity.OTCInfo.MailDate);
             memberAdditional.BenefitsActivity.OTCInfo.StartDate = HelperUtility.GetDateFromString(member.BenefitsActivity.OTCInfo.StartDate);
             memberAdditional.BenefitsActivity.OTCInfo.ExpirationDate = HelperUtility.GetDateFromString(member.BenefitsActivity.OTCInfo.ExpirationDate);
+            memberAdditional.BenefitsActivity.TransportationUseIndicator = ConvertToBool(member.BenefitsActivity.TransportationUseIndicator);
 
-            memberAdditional.Medication.DayRefillInd90 = member.Medication.DayRefillInd90.ToLower().StartsWith("t") || member.Medication.DayRefillInd90.Equals("1") ? true : false;
-            memberAdditional.Medication.MailOrderPharmacyInd = member.Medication.MailOrderPharmacyInd.ToLower().StartsWith("t") || member.Medication.MailOrderPharmacyInd.Equals("1") ? true : false;
-            memberAdditional.Medication.TakingMedInd = member.Medication.TakingMedInd.ToLower().StartsWith("t") || member.Medication.TakingMedInd.Equals("1") ? true : false;
+            memberAdditional.Medication.DayRefillInd90 = ConvertToBool(member.Medication.DayRefillInd90);
+            memberAdditional.Medication.MailOrderPharmacyInd = ConvertToBool(member.Medication.MailOrderPharmacyInd);
+            memberAdditional.Medication.TakingMedInd = ConvertToBool(member.Medication.TakingMedInd);
 
             memberAdditional.IsActive = true;
             memberAdditional.CreatedOn = DateTime.UtcNow;
