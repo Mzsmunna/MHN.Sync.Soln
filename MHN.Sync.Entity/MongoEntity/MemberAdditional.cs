@@ -9,6 +9,7 @@ namespace MHN.Sync.Entity.MongoEntity
     public class MemberAdditional : IEntity
     {
         public string Id { get; set; }
+        public string ProspectMemberDataRef { get; set; }
         public string MBI { get; set; }
         public bool? OutreachNeededInd { get; set; }
         public string OutreachPriorityInd { get; set; }
@@ -130,7 +131,7 @@ namespace MHN.Sync.Entity.MongoEntity
 
     public class Medication
     {
-        public string DayRefillInd90 { get; set; }
+        public bool? DayRefillInd90 { get; set; }
         public bool? MailOrderPharmacyInd { get; set; }
         public string MedAdherenceRate { get; set; }
         public string GenericUtilizationRate { get; set; }

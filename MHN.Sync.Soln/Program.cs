@@ -185,6 +185,11 @@ namespace MHN.Sync.Soln
                 case MHNSyncType.Member:
                     manager = new MemberFileManager(_prospectMemberRepository, _memberRepository, _jwtHelperUtility);
                     break;
+                case MHNSyncType.MemberAdditional:
+                    manager = new MemberAdditionalFileManager(_prospectMemberRepository, _memberAdditionalRepository, _jwtHelperUtility);
+                    break;
+
+                    
 
                     //case MocSyncType.Moc_Audit_CoverageStartDate:
                     //    manager = new CoverageDateCheckingManager(_memberEnrollmentInfoRepository, _memberHraRepository);
@@ -245,6 +250,7 @@ namespace MHN.Sync.Soln
             {
                 { MHNSyncType.ProspectMember, "ProspectMember data Parse" },
                 { MHNSyncType.Member, "Member data Parse" },
+                { MHNSyncType.MemberAdditional, "Member Additional data Parse" },
             };
         }
     }

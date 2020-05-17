@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\SharedMethods.cs" />
+    <Compile Include="Managers\FileRead\MemberAdditionalFileManager.cs" />
     <Compile Include="Managers\FileRead\MemberFileManager.cs" />
     <Compile Include="Managers\FileRead\ProspectFileManager.cs" />
     <Compile Include="Program.cs" />

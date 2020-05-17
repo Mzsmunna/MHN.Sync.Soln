@@ -9,6 +9,7 @@ namespace MHN.Sync.Entity.Enum
     public enum MHNSyncType
     {
         ProspectMember,
-        Member
+        Member,
+        MemberAdditional
     }
 }
