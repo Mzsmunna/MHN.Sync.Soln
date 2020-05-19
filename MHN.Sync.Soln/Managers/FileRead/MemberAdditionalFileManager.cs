@@ -128,7 +128,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
             using (fileReadableStream)
             {
-                memberAdditionalModelList = CsvUtility.ReadDataFromTextReader<MemberAdditionalModel, MemberAdditionalModelMap>(fileReadableStream, ',', true);
+                memberAdditionalModelList = CsvUtility.ReadDataFromTextReader<MemberAdditionalModel, MemberAdditionalModelMap>(fileReadableStream, '|', true);
 
                 //memberModelList = JsonConvert.DeserializeObject<List<Member>>(JsonConvert.SerializeObject(membersList));
                 //string jSon = JsonConvert.SerializeObject(prospectList, Formatting.Indented);
