@@ -83,14 +83,14 @@ namespace MHN.Sync.Entity.MongoEntity
         public string LEPAmount { get; set; }
         public DateTime? LEPLetterSentDate { get; set; }
         public bool? FiledGrievanceIndicator { get; set; }
-        public string GrievanceDate1 { get; set; }
-        public string GrievanceSource1 { get; set; }
-        public string GrievanceDescription1 { get; set; }
-        public string GrievanceOutcome1 { get; set; }
-        public string GrievanceDate2 { get; set; }
-        public string GrievanceSource2 { get; set; }
-        public string GrievanceDescription2 { get; set; }
-        public string GrievanceOutcome2 { get; set; }
+        public string GrievanceDate { get; set; }
+        public string GrievanceSource { get; set; }
+        public string GrievanceDescription { get; set; }
+        public string GrievanceOutcome { get; set; }
+        //public string GrievanceDate2 { get; set; }
+        //public string GrievanceSource2 { get; set; }
+        //public string GrievanceDescription2 { get; set; }
+        //public string GrievanceOutcome2 { get; set; }
         public bool? FiledAppealIndicator { get; set; }
         public DateTime? AppealDate { get; set; }
         public string AppealType { get; set; }
@@ -136,12 +136,24 @@ namespace MHN.Sync.Entity.MongoEntity
         public string MedAdherenceRate { get; set; }
         public string GenericUtilizationRate { get; set; }
         public bool? TakingMedInd { get; set; }
-        public string MedicationNumber1 { get; set; }
-        public string MedicationName1 { get; set; }
-        public string MedicationQuantity1 { get; set; }
-        public string MedicationNumber2 { get; set; }
-        public string MedicationName2 { get; set; }
-        public string MedicationQuantity2 { get; set; }
+        public string MedicationNumber { get; set; }
+        public string MedicationName { get; set; }
+        public string MedicationQuantity { get; set; }
+        //public string MedicationNumber2 { get; set; }
+        //public string MedicationName2 { get; set; }
+        //public string MedicationQuantity2 { get; set; }
+    }
+
+    public class AddressChanged
+    {
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string CityName { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string PhoneOrLandLineNumber { get; set; }
+        public string MobileNumber { get; set; }
+        public string PreferredPhoneNumber { get; set; }
     }
 
 }
