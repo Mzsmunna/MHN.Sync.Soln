@@ -159,7 +159,8 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
                 //Console.Write("\rProcessing : {0}% ({1}) | {2}", (processDataCount * 100) / totalDataCount, processDataCount, totalDataCount);
                 
-                id = _prospectMemberRepository.Save(prospectMember);
+                if(prospectMember != null)
+                    id = _prospectMemberRepository.Save(prospectMember);
 
                 var memberAdditional = ConvertToMemberAdditional(member);
                 memberAdditional.ProspectMemberDataRef = id;
@@ -182,25 +183,27 @@ namespace MHN.Sync.Soln.Managers.FileRead
             
             if (prospectMember == null)
             {
-                prospectMember = new ProspectMember()
-                {
-                    MBI = member.MBI.ToLower(),
+                //prospectMember = new ProspectMember()
+                //{
+                //    MBI = member.MBI.ToLower(),
 
-                    IsApplicant = false,
+                //    IsApplicant = false,
 
-                    IsMember = true,
-                    IsActive = true,
-                    CreatedOn = DateTime.UtcNow,
-                };
-                
+                //    IsMember = true,
+                //    IsActive = true,
+                //    CreatedOn = DateTime.UtcNow,
+                //};
+
             }
-
-            prospectMember.OutreachNeededInd = ConvertToBool(member.OutreachNeededInd);
-            prospectMember.LISStatusInd = ConvertToBool(member.Supplementary.LISStatusInd);
-            prospectMember.DisEnrollmentRequest = ConvertToBool(member.RiskActivity.DisEnrollmentRequest);
-            prospectMember.DisEnrollmentEffectiveDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentEffectiveDate);
-            prospectMember.FiledGrievanceIndicator = ConvertToBool(member.RiskActivity.FiledGrievanceIndicator);
-            prospectMember.FiledAppealIndicator = ConvertToBool(member.RiskActivity.FiledAppealIndicator);
+            else
+            {
+                prospectMember.OutreachNeededInd = ConvertToBool(member.OutreachNeededInd);
+                prospectMember.LISStatusInd = member.Supplementary.LISStatusInd;
+                prospectMember.DisEnrollmentRequest = ConvertToBool(member.RiskActivity.DisEnrollmentRequest);
+                prospectMember.DisEnrollmentEffectiveDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentEffectiveDate);
+                prospectMember.FiledGrievanceIndicator = ConvertToBool(member.RiskActivity.FiledGrievanceIndicator);
+                prospectMember.FiledAppealIndicator = ConvertToBool(member.RiskActivity.FiledAppealIndicator);
+            }
 
             return prospectMember;
         }
@@ -226,7 +229,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
             memberAdditional.OutreachNeededInd = ConvertToBool(member.OutreachNeededInd);
             
-            memberAdditional.Supplementary.LISStatusInd = ConvertToBool(member.Supplementary.LISStatusInd);
             //memberAdditional.Supplementary.MedicaidEligibilityInd = ConvertToBool(member.Supplementary.MedicaidEligibilityInd);
             memberAdditional.Supplementary.LISStartDate = HelperUtility.GetDateFromString(member.Supplementary.LISStartDate);
             memberAdditional.Supplementary.LISEndDate = HelperUtility.GetDateFromString(member.Supplementary.LISEndDate);

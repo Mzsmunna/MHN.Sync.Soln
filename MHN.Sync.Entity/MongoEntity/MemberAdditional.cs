@@ -33,7 +33,7 @@ namespace MHN.Sync.Entity.MongoEntity
         public string ApplicationID { get; set; }
         public string MedicaidNumber { get; set; }
         //public bool? MedicaidEligibilityInd { get; set; }
-        public bool? LISStatusInd { get; set; }
+        public string LISStatusInd { get; set; }
         public DateTime? LISStartDate { get; set; }
         public DateTime? LISEndDate { get; set; }
         public string LISLevel { get; set; }

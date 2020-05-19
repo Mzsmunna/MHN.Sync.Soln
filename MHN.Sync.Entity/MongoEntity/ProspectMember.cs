@@ -36,7 +36,7 @@ namespace MHN.Sync.Entity.MongoEntity
 
         //For MemberAdditional
         public bool? OutreachNeededInd { get; set; }
-        public bool? LISStatusInd { get; set; }
+        public string LISStatusInd { get; set; }
         public bool? DisEnrollmentRequest { get; set; }
         public DateTime? DisEnrollmentEffectiveDate { get; set; }
         public bool? FiledGrievanceIndicator { get; set; }
