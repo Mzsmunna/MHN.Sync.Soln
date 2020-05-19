@@ -113,6 +113,17 @@ namespace MHN.Sync.MongoRepository
                         });
                     }
 
+                    if (!BsonClassMap.IsClassMapRegistered(typeof(AddressChanged)))
+                    {
+                        BsonClassMap.RegisterClassMap<AddressChanged>(child =>
+                        {
+                            child.AutoMap();
+                            child.SetIgnoreExtraElements(true);
+
+                            child.GetMemberMap(x => x.ZipCode).SetSerializer(new EncryptedStringSerializer());
+                        });
+                    }
+
                 });
             }
         }
