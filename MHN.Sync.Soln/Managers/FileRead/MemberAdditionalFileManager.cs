@@ -195,6 +195,13 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 
             }
 
+            prospectMember.OutreachNeededInd = ConvertToBool(member.OutreachNeededInd);
+            prospectMember.LISStatusInd = ConvertToBool(member.Supplementary.LISStatusInd);
+            prospectMember.DisEnrollmentRequest = ConvertToBool(member.RiskActivity.DisEnrollmentRequest);
+            prospectMember.DisEnrollmentEffectiveDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentEffectiveDate);
+            prospectMember.FiledGrievanceIndicator = ConvertToBool(member.RiskActivity.FiledGrievanceIndicator);
+            prospectMember.FiledAppealIndicator = ConvertToBool(member.RiskActivity.FiledAppealIndicator);
+
             return prospectMember;
         }
 

@@ -33,6 +33,14 @@ namespace MHN.Sync.Entity.MongoEntity
         public DateTime? CreatedOn { get; set; }
         public List<MHNAcquisition> AcquisitionList { get; set; }
 
+        //For MemberAdditional
+        public bool? OutreachNeededInd { get; set; }
+        public bool? LISStatusInd { get; set; }
+        public bool? DisEnrollmentRequest { get; set; }
+        public DateTime? DisEnrollmentEffectiveDate { get; set; }
+        public bool? FiledGrievanceIndicator { get; set; }
+        public bool? FiledAppealIndicator { get; set; }
+
     }
 
     public class MHNAcquisition
