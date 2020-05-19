@@ -23,12 +23,13 @@ namespace MHN.Sync.Entity.MongoEntity
         public string Status { get; set; }
         public string AgentName { get; set; }
         public bool IsMember { get; set; }
-        public bool IsApplicant { get; set; }
+        public bool IsApplicant { get; set; }       
         public DateTime? TermDateOn { get; set; }
         public DateTime? EnrolledOn { get; set; }
         public DateTime? DisEnrolledOn { get; set; }
         public DateTime? PTC_Date_Stamped { get; set; }
         public DateTime? PTCExpiredOn { get; set; }
+        public DateTime? LastContactAttemptedOn { get; set; }
         public bool IsActive { get; set; }
         public DateTime? CreatedOn { get; set; }
         public List<MHNAcquisition> AcquisitionList { get; set; }

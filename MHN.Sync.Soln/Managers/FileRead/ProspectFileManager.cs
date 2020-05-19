@@ -203,6 +203,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 Type = prospect.Type.ToLower(),
                 PTCExpiredOn = HelperUtility.GetDateFromString(prospect.PTCExpiredOn),
                 PTC_Date_Stamped = HelperUtility.GetDateFromString(prospect.PTC_Date_Stamped),
+                LastContactAttemptedOn = HelperUtility.GetDateFromString(prospect.LastContactAttemptedOn),
                 IsApplicant = false,
 
                 IsMember = false,
