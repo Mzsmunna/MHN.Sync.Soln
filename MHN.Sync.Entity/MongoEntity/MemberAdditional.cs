@@ -22,6 +22,7 @@ namespace MHN.Sync.Entity.MongoEntity
         public InteractionHistory InteractionHistory { get; set; }
         public BenefitsActivity BenefitsActivity { get; set; }
         public Medication Medication { get; set; }
+        public AddressChanged AddressChanged { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     }
