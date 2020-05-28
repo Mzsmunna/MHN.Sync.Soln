@@ -67,7 +67,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
             try
             {
                 Result.Message.CustomAppender(Environment.NewLine + "Prospect Member Service started on " + HelperUtility.GetCurrentTimeInEST());
-                FtpsUtility.CustomInitialize(_jwtHelperUtility);
+                //FtpsUtility.CustomInitialize(_jwtHelperUtility);
                 stopwatch.Start();
                 FileProcess();
                 stopwatch.Stop();
