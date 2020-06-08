@@ -29,6 +29,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private static IProspectRepository _prospectRepository;
 
         public JobManagerResult Result;
+        private static char delimiter;
 
         private static StringBuilder output = new StringBuilder();
         private static Stopwatch stopwatch = new Stopwatch();
@@ -130,10 +131,11 @@ namespace MHN.Sync.Soln.Managers.FileRead
         private void FileProcess(TextReader fileReadableStream)
         {
             WriteLine("Processing the file....");
+            delimiter = NewJob.delimiter;
 
             using (fileReadableStream)
             {
-                prospectModelList = CsvUtility.ReadDataFromTextReader<ProspectModel, ProspectModelMap>(fileReadableStream, ',', true);
+                prospectModelList = CsvUtility.ReadDataFromTextReader<ProspectModel, ProspectModelMap>(fileReadableStream, delimiter, true);
 
                 //prospectModelList = JsonConvert.DeserializeObject<List<ProspectMember>>(JsonConvert.SerializeObject(prospectList));
                 //string jSon = JsonConvert.SerializeObject(prospectList, Formatting.Indented);
