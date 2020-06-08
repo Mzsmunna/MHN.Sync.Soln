@@ -97,13 +97,60 @@ namespace MHN.Sync.Jobs
         public static TextReader ManualProcess(JobManagerResult Result)
         {
             TextReader fileReadableStream = null;
+            string[] allfiles;
 
             Console.WriteLine("Provide file location with filename: ");
             string location = Console.ReadLine();
 
             if (!string.IsNullOrEmpty(location))
             {
-                SetDelimiter(location);
+                if (location.Equals(location.Split('.').LastOrDefault()))
+                {
+                    allfiles = Directory.GetFiles(location, "*.*", SearchOption.AllDirectories);
+
+                    Console.WriteLine("\n\tSelect a file: Enter the Number");
+                    int count = 1; 
+                    foreach (var file in allfiles)
+                    {
+                        Console.WriteLine("\t\t" + count + ". " + file.Split('\\').LastOrDefault());
+                        count++;
+                        //FileInfo info = new FileInfo(file);
+                    }
+
+                    int n;
+                    do
+                    {
+                        string fileNumber = Console.ReadLine();
+                        
+                        if (int.TryParse(fileNumber, out n))
+                        {
+                            if (n <= allfiles.Length)
+                            {
+                                location = allfiles[n - 1];
+                                SetDelimiter(location);
+                            }                               
+                        }
+                        else
+                        {
+                            location = "";
+                            Result.IsSuccess = false;
+                            Result.Message.CustomAppender("\tInvalid Number! Enter the Number Again :");
+                        }
+
+                        if(n > allfiles.Length)
+                        {
+                            Console.WriteLine("\n\tNot available! Enter the Number Angain :");
+                        }
+
+                    } while (n > allfiles.Length || n == 0);
+                    
+                }
+                else
+                {
+                    SetDelimiter(location);
+                }
+                
+
                 Result.FileLocations.Add(location);
                 Result.FileNames.Add(location.Split('\\').LastOrDefault());
                 Result.IsSearchedFileFound = true;
