@@ -97,7 +97,6 @@ namespace MHN.Sync.Jobs
         public static TextReader ManualProcess(JobManagerResult Result)
         {
             TextReader fileReadableStream = null;
-            string[] allfiles;
 
             Console.WriteLine("Provide file location with filename: ");
             string location = Console.ReadLine();
@@ -106,44 +105,7 @@ namespace MHN.Sync.Jobs
             {
                 if (location.Equals(location.Split('.').LastOrDefault()))
                 {
-                    allfiles = Directory.GetFiles(location, "*.*", SearchOption.AllDirectories);
-
-                    Console.WriteLine("\n\tSelect a file: Enter the Number");
-                    int count = 1; 
-                    foreach (var file in allfiles)
-                    {
-                        Console.WriteLine("\t\t" + count + ". " + file.Split('\\').LastOrDefault());
-                        count++;
-                        //FileInfo info = new FileInfo(file);
-                    }
-
-                    int n;
-                    do
-                    {
-                        string fileNumber = Console.ReadLine();
-                        
-                        if (int.TryParse(fileNumber, out n))
-                        {
-                            if (n <= allfiles.Length)
-                            {
-                                location = allfiles[n - 1];
-                                SetDelimiter(location);
-                            }                               
-                        }
-                        else
-                        {
-                            location = "";
-                            Result.IsSuccess = false;
-                            Result.Message.CustomAppender("\tInvalid Number! Enter the Number Again :");
-                        }
-
-                        if(n > allfiles.Length)
-                        {
-                            Console.WriteLine("\n\tNot available! Enter the Number Angain :");
-                        }
-
-                    } while (n > allfiles.Length || n == 0);
-                    
+                    location = SelectFileFromFolder(location);
                 }
                 else
                 {
@@ -164,6 +126,47 @@ namespace MHN.Sync.Jobs
             }
 
             return fileReadableStream;
+        }
+
+        public static string SelectFileFromFolder(string location)
+        {
+            string[] allfiles = Directory.GetFiles(location, "*.*", SearchOption.AllDirectories);
+
+            Console.WriteLine("\n\tSelect a file: Enter the Number");
+            int count = 1;
+            foreach (var file in allfiles)
+            {
+                Console.WriteLine("\t\t" + count + ". " + file.Split('\\').LastOrDefault());
+                count++;
+                //FileInfo info = new FileInfo(file);
+            }
+
+            int n;
+            do
+            {
+                string fileNumber = Console.ReadLine();
+
+                if (int.TryParse(fileNumber, out n))
+                {
+                    if (n <= allfiles.Length)
+                    {
+                        location = allfiles[n - 1];
+                        SetDelimiter(location);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\tInvalid Number! Enter the Number Again :");
+                }
+
+                if (n > allfiles.Length)
+                {
+                    Console.WriteLine("\n\tNot available! Enter the Number Angain :");
+                }
+
+            } while (n > allfiles.Length || n == 0);
+
+            return location;
         }
 
         #region CSV-With_Class_Map
