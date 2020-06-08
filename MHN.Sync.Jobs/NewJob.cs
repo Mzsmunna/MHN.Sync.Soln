@@ -15,10 +15,9 @@ namespace MHN.Sync.Jobs
 {
     public static class NewJob
     {
+        public static char delimiter { get; private set; } = '\0';
         public delegate void DataProcessDelegate<T>(List<T> dataList) where T : class;
-        public delegate void DataFetchDelegate(int currentPage, int pageSize);
-
-        public static char delimiter = '\0';
+        public delegate void DataFetchDelegate(int currentPage, int pageSize);        
 
         private static void SetDelimiter(string file)
         {
