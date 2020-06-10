@@ -131,10 +131,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
             {
                 memberModelList = CsvUtility.ReadDataFromTextReader<MemberModel, MemberModelMap>(fileReadableStream, delimiter, true);
 
-                //memberModelList = JsonConvert.DeserializeObject<List<Member>>(JsonConvert.SerializeObject(membersList));
-                //string jSon = JsonConvert.SerializeObject(prospectList, Formatting.Indented);
-                //prospectMmeberList = JsonConvert.DeserializeObject<List<ProspectMember>>(jSon);
-
                 //BlobUtility.DataListUpload<CareplanMailbackViewModel>(careplanMailbackList, BlobConstant.Azure_Connection_String, BlobConstant.MOC_Audit_Container, BlobConstant.Careplan_Mailback, fileToSearch);
 
                 totalDataCount = memberModelList.Count();

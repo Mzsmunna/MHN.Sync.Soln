@@ -132,10 +132,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
             {
                 memberAdditionalModelList = CsvUtility.ReadDataFromTextReader<MemberAdditionalModel, MemberAdditionalModelMap>(fileReadableStream, delimiter, true);
 
-                //memberModelList = JsonConvert.DeserializeObject<List<Member>>(JsonConvert.SerializeObject(membersList));
-                //string jSon = JsonConvert.SerializeObject(prospectList, Formatting.Indented);
-                //prospectMmeberList = JsonConvert.DeserializeObject<List<ProspectMember>>(jSon);
-
                 //BlobUtility.DataListUpload<CareplanMailbackViewModel>(careplanMailbackList, BlobConstant.Azure_Connection_String, BlobConstant.MOC_Audit_Container, BlobConstant.Careplan_Mailback, fileToSearch);
 
                 totalDataCount = memberAdditionalModelList.Count();
@@ -218,13 +214,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
 
         private MemberAdditional ConvertToMemberAdditional(MemberAdditionalModel member)
         {
-            //MemberAdditional memberAdditional = new MemberAdditional
-            //{
-
-            //    IsActive = true,
-            //    CreatedOn = DateTime.UtcNow,
-            //};
-
             var config = new JsonSerializerSettings { Error = (se, ev) => { ev.ErrorContext.Handled = true; } };
 
             var memberAdditional = JsonConvert.DeserializeObject<MemberAdditional>(JsonConvert.SerializeObject(member), config);

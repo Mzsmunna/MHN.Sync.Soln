@@ -137,10 +137,6 @@ namespace MHN.Sync.Soln.Managers.FileRead
             {
                 prospectModelList = CsvUtility.ReadDataFromTextReader<ProspectModel, ProspectModelMap>(fileReadableStream, delimiter, true);
 
-                //prospectModelList = JsonConvert.DeserializeObject<List<ProspectMember>>(JsonConvert.SerializeObject(prospectList));
-                //string jSon = JsonConvert.SerializeObject(prospectList, Formatting.Indented);
-                //prospectMmeberList = JsonConvert.DeserializeObject<List<ProspectMember>>(jSon);
-
                 //BlobUtility.DataListUpload<CareplanMailbackViewModel>(careplanMailbackList, BlobConstant.Azure_Connection_String, BlobConstant.MOC_Audit_Container, BlobConstant.Careplan_Mailback, fileToSearch);
 
                 totalDataCount = prospectModelList.Count();
