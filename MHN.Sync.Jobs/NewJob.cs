@@ -15,24 +15,25 @@ namespace MHN.Sync.Jobs
 {
     public static class NewJob
     {
-        public static char delimiter { get; private set; } = '\0';
+        public static char delimiter { get; private set; } = '\t';
         public delegate void DataProcessDelegate<T>(List<T> dataList) where T : class;
         public delegate void DataFetchDelegate(int currentPage, int pageSize);        
 
         private static void SetDelimiter(string file)
         {
-            if(delimiter.Equals('\0'))
-            {
-                string fitExt = file.Split('.').LastOrDefault();
+            string fileExt = file.Split('.').LastOrDefault();
 
-                if (fitExt.ToLower().Equals("txt"))
-                {
-                    delimiter = '|';
-                }
-                else if (fitExt.ToLower().Equals("csv"))
-                {
-                    delimiter = ',';
-                }
+            if (fileExt.ToLower().Equals("txt"))
+            {
+                delimiter = '|';
+            }
+            else if (fileExt.ToLower().Equals("dat"))
+            {
+                delimiter = '|';
+            }
+            else if (fileExt.ToLower().Equals("csv"))
+            {
+                delimiter = ',';
             }
         }
 
