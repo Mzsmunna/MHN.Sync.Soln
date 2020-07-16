@@ -207,6 +207,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 IsMember = false,
                 IsActive = true,
                 CreatedOn = DateTime.UtcNow,
+                Source = ApplicationConstants.Source
             };
 
             return prospectMember;

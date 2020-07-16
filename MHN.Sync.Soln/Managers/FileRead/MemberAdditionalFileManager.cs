@@ -190,6 +190,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 //    IsMember = true,
                 //    IsActive = true,
                 //    CreatedOn = DateTime.UtcNow,
+                //    Source = ApplicationConstants.Source
                 //};
 
             }
@@ -201,6 +202,7 @@ namespace MHN.Sync.Soln.Managers.FileRead
                 prospectMember.DisEnrollmentEffectiveDate = HelperUtility.GetDateFromString(member.RiskActivity.DisEnrollmentEffectiveDate);
                 prospectMember.FiledGrievanceIndicator = ConvertToBool(member.RiskActivity.FiledGrievanceIndicator);
                 prospectMember.FiledAppealIndicator = ConvertToBool(member.RiskActivity.FiledAppealIndicator);
+                prospectMember.Source = ApplicationConstants.Source;
             }
 
             return prospectMember;

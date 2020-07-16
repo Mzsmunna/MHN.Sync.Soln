@@ -462,6 +462,22 @@ namespace MHN.Sync.Entity
             }
         }
 
+        public static string Source
+        {
+            get
+            {
+                string key = "Source";
+                if (ConfigurationManager.AppSettings[key] != null && !string.IsNullOrEmpty(ConfigurationManager.AppSettings[key] as string))
+                {
+                    return ConfigurationManager.AppSettings[key] as string;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public static string EmailContentsToClientPath
         {
             get
