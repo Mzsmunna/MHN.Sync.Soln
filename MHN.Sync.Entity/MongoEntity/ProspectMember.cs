@@ -41,6 +41,10 @@ namespace MHN.Sync.Entity.MongoEntity
         public DateTime? DisEnrollmentEffectiveDate { get; set; }
         public bool? FiledGrievanceIndicator { get; set; }
         public bool? FiledAppealIndicator { get; set; }
+        //--new
+        public string LastSubmissionDateDifference { get; set; }
+        public string Source { get; set; }
+        public ExternalSubmitterInfo ExternalSubmitterInfo { get; set; }
 
     }
 
@@ -49,5 +53,14 @@ namespace MHN.Sync.Entity.MongoEntity
         public string FormType { get; set; }
         public DateTime FormSubmissionDate { get; set; }
         public string RequestSubmissionRefId { get; set; }
+    }
+
+    public class ExternalSubmitterInfo
+    {
+        public string OrganizationId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Role { get; set; }
+        public string CurrentDate { get; set; }
     }
 }
