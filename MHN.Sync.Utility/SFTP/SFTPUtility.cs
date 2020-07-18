@@ -9,11 +9,195 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-//using System.Windows.Forms;
 
 namespace MHN.Sync.Utility.SFTP
 {
     public class SFTPUtility
+    {
+        private static ConnectionInfo connectionInfo = null;
+        public SFTPUtility(JWTHelperUtility utility, ConstantType ftpIdentifier)
+        {
+            var contentIdentifier = ftpIdentifier.ToString();
+            var FTPCredential = utility.GetSFTPCred((ApplicationConstants.Get<bool>(ConstantType.TestEnvironment) ? $"{contentIdentifier}-ftp-dev" : $"{contentIdentifier}-ftp-live"));
+            connectionInfo = new ConnectionInfo(FTPCredential.Host, Convert.ToInt32(FTPCredential.Port), FTPCredential.UserName,
+            new AuthenticationMethod[]{
+                new PasswordAuthenticationMethod(FTPCredential.UserName, FTPCredential.Password)
+            });
+            Console.WriteLine(FTPCredential.Host);
+        }
+        public SFTPUtility(JWTHelperUtility utility, string ftpIdentifier)
+        {
+            var contentIdentifier = ftpIdentifier.ToString();
+            var FTPCredential = utility.GetSFTPCred((ApplicationConstants.Get<bool>(ConstantType.TestEnvironment) ? $"{contentIdentifier}-ftp-dev" : $"{contentIdentifier}-ftp-live"));
+            connectionInfo = new ConnectionInfo(FTPCredential.Host, Convert.ToInt32(FTPCredential.Port), FTPCredential.UserName,
+            new AuthenticationMethod[]{
+                new PasswordAuthenticationMethod(FTPCredential.UserName, FTPCredential.Password)
+            });
+        }
+        public bool FileExistsInFtps(string fileLocation, string fileName)
+        {
+            bool isFileFound = false;
+            try
+            {
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    Console.WriteLine(Environment.NewLine + "Checking file : " + connectionInfo.Host + fileLocation + fileName + Environment.NewLine);
+
+                    sftp.Connect();
+                    isFileFound = sftp.Exists(fileLocation + fileName);
+
+                    if (isFileFound)
+                    {
+                        Console.WriteLine(fileName + " File found");
+                    }
+                    else
+                    {
+                        Console.WriteLine(fileName + " File Not found");
+                    }
+                    sftp.Disconnect();
+                }
+                return isFileFound;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public TextReader DownloadFile(string location, string fileName)
+        {
+            try
+            {
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    sftp.Connect();
+                    string fileSaveLocation = string.Format(@"{0}\{1}", ApplicationConstants.ExportFilePath, fileName);
+                    Console.WriteLine("File Save Location: " + fileSaveLocation);
+
+                    using (var fs = new FileStream(fileSaveLocation, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        sftp.DownloadFile(location + fileName, fs);
+                        Console.WriteLine("Download Complete");
+                        fs.Flush();
+                        fs.Close();
+                        fs.Dispose();
+                    }
+
+                    sftp.Disconnect();
+                    TextReader reader = File.OpenText(fileSaveLocation);
+                    return reader;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool UploadFile(byte[] fileContents, string uploadLocation, string filename)
+        {
+            try
+            {
+                Console.WriteLine("Uploading File Into : " + uploadLocation + filename);
+                var fileStream = new MemoryStream(fileContents);
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    sftp.Connect();
+                    sftp.UploadFile(fileStream, uploadLocation + filename);
+
+                    sftp.Disconnect();
+                }
+                Console.WriteLine("Upload File Complete, status");
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+        public MemoryStream DownloadAsMemoryStream(string downloadLocation, string fileName)
+        {
+            string relativePath = downloadLocation + fileName;
+            try
+            {
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    sftp.Connect();
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        sftp.DownloadFile(relativePath, memoryStream);
+
+                        sftp.Disconnect();
+                        return memoryStream;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public string DownloadAsString(string downloadLocation, string fileName)
+        {
+            string relativePath = downloadLocation + fileName;
+            try
+            {
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    sftp.Connect();
+
+                    var files = sftp.ListDirectory(downloadLocation);
+
+                    foreach (var file in files)
+                    {
+                        if (file.Name.Equals(fileName))
+                        {
+                            return sftp.ReadAllText(file.FullName);
+                        }
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool RenameFileNameAsProcessed(string fileLocation, string fileName)
+        {
+            try
+            {
+                using (var sftp = new SftpClient(connectionInfo))
+                {
+                    Console.WriteLine(Environment.NewLine + "Checking file : " + connectionInfo.Host + fileLocation + fileName + Environment.NewLine);
+
+                    sftp.Connect();
+                    bool isFileFound = sftp.Exists(fileLocation + fileName);
+
+                    if (isFileFound)
+                    {
+                        Console.WriteLine(fileName + " File found");
+                        sftp.RenameFile(fileLocation + fileName, fileLocation + fileName + ".Processed");
+                    }
+                    else
+                    {
+                        Console.WriteLine(fileName + " File Not found");
+                    }
+                    sftp.Disconnect();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+
+    #region Older_Version
+    /*public class SFTPUtility
     {
         private static ConnectionInfo conncectionInfo = null;
 
@@ -172,5 +356,6 @@ namespace MHN.Sync.Utility.SFTP
                 throw ex;
             }
         }
-    }
+    }*/
+    #endregion
 }
