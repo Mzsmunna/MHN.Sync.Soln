@@ -51,6 +51,7 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Enum\ConstantType.cs" />
+    <Compile Include="Enum\DomainEnum.cs" />
     <Compile Include="Enum\MHNSyncType.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="MHNPayload.cs" />
