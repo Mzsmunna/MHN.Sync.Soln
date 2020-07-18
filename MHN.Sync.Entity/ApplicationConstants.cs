@@ -46,6 +46,22 @@ namespace MHN.Sync.Entity
             }
         }
 
+        public static string DatabaseContext
+        {
+            get
+            {
+                string key = "DatabaseContext";
+                if (ConfigurationManager.ConnectionStrings[key] != null && !string.IsNullOrEmpty(ConfigurationManager.ConnectionStrings[key].ConnectionString as string))
+                {
+                    return ConfigurationManager.ConnectionStrings["DatabaseContext"].ConnectionString as string;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public static string DatabaseContextContainer
         {
             get
