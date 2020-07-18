@@ -56,6 +56,7 @@
     <Compile Include="Field.cs" />
     <Compile Include="MHNPayload.cs" />
     <Compile Include="MongoEntity\Address.cs" />
+    <Compile Include="MongoEntity\DataSyncJobList.cs" />
     <Compile Include="MongoEntity\EnrollmentRequest.cs" />
     <Compile Include="MongoEntity\IEntity.cs" />
     <Compile Include="JobManagerResult.cs" />
