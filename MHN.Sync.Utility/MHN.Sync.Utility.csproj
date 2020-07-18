@@ -69,6 +69,7 @@
     <Compile Include="CSV\CsvUtility.cs" />
     <Compile Include="Excel\ExcelApp.cs" />
     <Compile Include="FTP\FtpsUtility.cs" />
+    <Compile Include="FTP\MhnFtpsUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SFTP\SFTPUtility.cs" />
   </ItemGroup>
