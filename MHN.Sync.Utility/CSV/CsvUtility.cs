@@ -12,9 +12,19 @@ namespace MHN.Sync.Utility.CSV
 {
     public static class CsvUtility
     {
+        public static char Delimiter = '\t';
+
+        private static void SetDelimiter (char delimiter)
+        {
+            if(!string.IsNullOrEmpty(delimiter.ToString()))
+            {
+                Delimiter = delimiter;
+            }
+        }
+
         #region With_Class_Map
 
-        public static List<T1> ReadDataFromFile<T1, T2>(string fileLocation, char delimiter, bool validateHeader) where T1 : class //new()
+        public static List<T1> ReadDataFromFile<T1, T2>(string fileLocation, char delimiter = ',', bool validateHeader = true) where T1 : class //new()
                                                                             where T2 : ClassMap<T1>//, new()
         {
             List<T1> csvResult = new List<T1>();
@@ -33,20 +43,22 @@ namespace MHN.Sync.Utility.CSV
             return csvResult;
         }
 
-        public static List<T1> ReadDataFromStream<T1, T2>(StreamReader reader, char delimiter, bool validateHeader) where T1 : class //new()
+        public static List<T1> ReadDataFromStream<T1, T2>(StreamReader reader, char delimiter = ',', bool validateHeader = true) where T1 : class //new()
                                                                             where T2 : ClassMap<T1>//, new()
         {
             List<T1> csvResult = ReadDataFromTextReader<T1, T2>(reader, delimiter, validateHeader);
             return csvResult;
         }
 
-        public static List<T1> ReadDataFromTextReader<T1, T2>(TextReader reader, char delimiter, bool validateHeader) where T1 : class //new()
+        public static List<T1> ReadDataFromTextReader<T1, T2>(TextReader reader, char delimiter = ',', bool validateHeader = true) where T1 : class //new()
                                                                             where T2 : ClassMap<T1>//, new()
         {
+            SetDelimiter(delimiter);
+
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 csv.Configuration.RegisterClassMap<T2>();
-                csv.Configuration.Delimiter = delimiter.ToString();
+                csv.Configuration.Delimiter = Delimiter.ToString();
 
                 if(!validateHeader)
                 {
@@ -65,7 +77,7 @@ namespace MHN.Sync.Utility.CSV
 
         #region Without_Class_Map
 
-        public static List<T> ReadDataFromFile<T>(string fileLocation, char delimiter, bool validateHeader) where T : class //new()                                                                           
+        public static List<T> ReadDataFromFile<T>(string fileLocation, char delimiter = ',', bool validateHeader = true) where T : class //new()                                                                           
         {
             List<T> csvResult = new List<T>();
 
@@ -83,17 +95,19 @@ namespace MHN.Sync.Utility.CSV
             return csvResult;
         }
 
-        public static List<T> ReadDataFromStream<T>(StreamReader reader, char delimiter, bool validateHeader) where T : class //new()
+        public static List<T> ReadDataFromStream<T>(StreamReader reader, char delimiter = ',', bool validateHeader = true) where T : class //new()
         {
             List<T> csvResult = ReadDataFromTextReader<T>(reader, delimiter, validateHeader);
             return csvResult;
         }
 
-        public static List<T> ReadDataFromTextReader<T>(TextReader reader, char delimiter, bool validateHeader) where T : class //new()
+        public static List<T> ReadDataFromTextReader<T>(TextReader reader, char delimiter = ',', bool validateHeader = true) where T : class //new()
         {
+            SetDelimiter(delimiter);
+
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                csv.Configuration.Delimiter = delimiter.ToString();
+                csv.Configuration.Delimiter = Delimiter.ToString();
 
                 if (!validateHeader)
                 {
@@ -110,19 +124,23 @@ namespace MHN.Sync.Utility.CSV
 
         #endregion
 
-        public static bool WriteDataToFile<T>(string fileLocation, char delimiter, List<T> dataList) where T : class
-        {          
+        public static bool WriteDataToFile<T>(List<T> dataList, string fileLocation, char delimiter = ',') where T : class
+        {
+            SetDelimiter(delimiter);
+
             using (var writer = new StreamWriter(fileLocation))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                csv.Configuration.Delimiter = delimiter.ToString();
+                csv.Configuration.Delimiter = Delimiter.ToString();
                 csv.WriteRecords(dataList);
                 return true;
             }
         }
 
-        public static bool AppendManyDataToFile<T>(string fileLocation, char delimiter, List<T> dataList) where T : class
+        public static bool AppendManyDataToFile<T>(List<T> dataList, string fileLocation, char delimiter) where T : class
         {
+            SetDelimiter(delimiter);
+
             // Do not include the header row if the file already exists
             CsvConfiguration csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture)
             {
@@ -136,7 +154,7 @@ namespace MHN.Sync.Utility.CSV
                 {
                     using (var csv = new CsvWriter(streamWriter, csvConfig))
                     {
-                        csv.Configuration.Delimiter = delimiter.ToString();
+                        csv.Configuration.Delimiter = Delimiter.ToString();
                         // Append records to csv OR txt
                         csv.WriteRecords(dataList);
                         return true;
@@ -145,15 +163,37 @@ namespace MHN.Sync.Utility.CSV
             }
         }
 
-        public static bool AppendDataToFile<T>(string filePath, char delimiter, T data) where T : class
+        public static bool AppendDataToFile<T>(T data, string filePath, char delimiter) where T : class
         {
             var dataList = new List<T>();
 
             dataList.Add(data);
 
-            var isSuccess = AppendManyDataToFile<T>(filePath, delimiter, dataList);
+            var isSuccess = AppendManyDataToFile<T>(dataList, filePath, delimiter);
 
             return isSuccess;
+        }
+
+        // List To Byte Conversion
+        public static byte[] ConvertListToBytes<T>(List<T> dataList, char delimiter = ',', CsvConfiguration configuration = null) where T : class
+        {
+            SetDelimiter(delimiter);
+
+            if (configuration == null)
+                configuration = new CsvConfiguration(CultureInfo.CurrentCulture);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var streamWriter = new StreamWriter(memoryStream, Encoding.Unicode))
+                {
+                    using (var csvWriter = new CsvWriter(streamWriter, configuration))
+                    {
+                        csvWriter.Configuration.Delimiter = Delimiter.ToString();
+                        csvWriter.WriteRecords(dataList);
+                    }
+                }
+                return memoryStream.ToArray();
+            }
         }
     }
 }

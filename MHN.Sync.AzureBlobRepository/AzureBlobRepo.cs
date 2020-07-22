@@ -7,7 +7,7 @@ using Microsoft.Azure; //Namespace for CloudConfigurationManager
 
 namespace MHN.Sync.AzureBlobRepository
 {
-    public static class AzureBlobRepository
+    public static class AzureBlobRepo
     {
         public static void UploadBlob(string connectionStringName, string containerName, string fileLocation, string fileName, string folderName)
         {

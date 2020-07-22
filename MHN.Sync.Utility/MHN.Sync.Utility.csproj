@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blob\AzureBlobUtility.cs" />
     <Compile Include="CSV\CsvExport.cs" />
     <Compile Include="CSV\CsvUtility.cs" />
     <Compile Include="Excel\ExcelApp.cs" />
@@ -82,10 +83,15 @@
       <Project>{B422EC73-AE22-45B0-A16B-F353BC314BE1}</Project>
       <Name>Cerebro.JWTAuthService.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.AzureBlobRepository\MHN.Sync.AzureBlobRepository.csproj">
+      <Project>{DEF020CA-B6FE-43FD-BFB8-684EBEF62201}</Project>
+      <Name>MHN.Sync.AzureBlobRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MHN.Sync.Entity\MHN.Sync.Entity.csproj">
       <Project>{A6C5CC27-CC8D-4789-8481-A2631C2CC3F8}</Project>
       <Name>MHN.Sync.Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

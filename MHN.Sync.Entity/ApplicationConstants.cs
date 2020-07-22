@@ -222,6 +222,22 @@ namespace MHN.Sync.Entity
             }
         }
 
+        public static bool UploadToAzureBlob
+        {
+            get
+            {
+                string key = "UploadToAzureBlob";
+                if (ConfigurationManager.AppSettings[key] != null && !string.IsNullOrEmpty(ConfigurationManager.AppSettings[key] as string))
+                {
+                    return Convert.ToBoolean(ConfigurationManager.AppSettings[key] as string);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         public static string SFTPUploadFileLocation
         {
             get
