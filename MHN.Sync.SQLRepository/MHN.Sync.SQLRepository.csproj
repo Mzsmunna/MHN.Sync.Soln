@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="DAL\SqlClientContext.cs" />
     <Compile Include="DAL\SqlDbContext.cs" />
-    <Compile Include="DAL\Test.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="EntityConfig\IntakeWorkflowConfiguration.cs" />
     <Compile Include="EntityConfig\Test.cs" />
