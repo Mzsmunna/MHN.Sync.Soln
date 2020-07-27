@@ -24,6 +24,8 @@ namespace MHN.Sync.IOC.Module
             Bind<IProspectRepository>().To<ProspectRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
             Bind<IMemberRepository>().To<MemberRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
             Bind<IMemberAdditionalRepository>().To<MemberAdditionalRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
+            Bind<IEnrollmentRequestRepository>().To<EnrollmentRequestRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
+            Bind<IPTCRequestRepository>().To<PTCRequestRepository>().WithConstructorArgument("dbContext", configService.DatabaseContext);
 
             Bind(typeof(IRepository<>)).To(typeof(Repository<>));
 

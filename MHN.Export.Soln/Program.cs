@@ -1,29 +1,28 @@
 ﻿using Cerebro.JWTAuthService.Services.Helper;
+using MHN.Export.Soln.Managers.FileGenerate;
 using MHN.Sync.Entity;
 using MHN.Sync.Entity.Enum;
-using MHN.Sync.Helper;
 using MHN.Sync.Interface;
 using MHN.Sync.IOC.Module;
 using MHN.Sync.MongoInterface;
-using MHN.Sync.Soln.Managers.FileRead;
+//using MHN.Sync.Export.Managers.FileGenerate;
 using Ninject;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MHN.Sync.Soln
+namespace MHN.Export.Soln
 {
     class Program
     {
         private static IKernel kernel;
         private static IProspectMemberRepository _prospectMemberRepository;
-        private static IProspectRepository _prospectRepository;
-        private static IMemberRepository _memberRepository;
-        private static IMemberAdditionalRepository _memberAdditionalRepository;
+        private static IPTCRequestRepository _ptcRequestRepository;
+        private static IEnrollmentRequestRepository _enrollmentRequestRepository;
+
         private static JWTHelperUtility _jwtHelperUtility;
 
         //private static readonly string BaseAddress = Path.GetDirectoryName(Application.ExecutablePath);
@@ -38,7 +37,7 @@ namespace MHN.Sync.Soln
             //    Console.WriteLine("Matched");
             //}
 
-            Console.WriteLine("Initiating MHN Data Sync Jobs...");
+            Console.WriteLine("Initiating MHN Data Export Jobs...");
             // Creating File Export Path Directory
             //Directory.CreateDirectory(ApplicationConstants.ExportFilePath);
 
@@ -81,9 +80,9 @@ namespace MHN.Sync.Soln
         {
             kernel = GetNinjectKernel();
             _prospectMemberRepository = kernel.Get<IProspectMemberRepository>();
-            _prospectRepository = kernel.Get<IProspectRepository>();
-            _memberRepository = kernel.Get<IMemberRepository>();
-            _memberAdditionalRepository = kernel.Get<IMemberAdditionalRepository>();
+            _ptcRequestRepository = kernel.Get<IPTCRequestRepository>();
+            _enrollmentRequestRepository = kernel.Get<IEnrollmentRequestRepository>();
+
             //_dataSyncReportRepository = kernel.Get<IDataSyncReportRepository>();
             //_dataSyncJobListRepository = kernel.Get<IDataSyncJobListRepository>();
 
@@ -111,13 +110,13 @@ namespace MHN.Sync.Soln
             IJobManager manager;
             string type = string.Empty;
 
-            var syncTypes = GetAllSyncTypes();
+            var exportTypes = GetAllExportTypes();
 
             int listCount = 1;
             Console.WriteLine("** Select A Process To Run Manually:");
-            foreach (var synctype in syncTypes)
+            foreach (var exportType in exportTypes)
             {
-                Console.WriteLine(listCount + ". " + synctype.Value);
+                Console.WriteLine(listCount + ". " + exportType.Value);
                 listCount++;
             }
 
@@ -126,24 +125,24 @@ namespace MHN.Sync.Soln
             var input = Console.ReadLine();
 
             listCount = 1;
-            MHNSyncType selectedSyncType = new MHNSyncType();
+            MHNExportType selectedExportType = new MHNExportType();
             bool inputTypeMatch = false;
 
 
-            foreach (var syncType in syncTypes)
+            foreach (var exportType in exportTypes)
             {
                 if (listCount.ToString() == input)
                 {
                     inputTypeMatch = true;
-                    selectedSyncType = syncType.Key;
+                    selectedExportType = exportType.Key;
                 }
 
                 listCount++;
             }
             if (inputTypeMatch)
             {
-                type = selectedSyncType.ToString();
-                manager = GetInstance(selectedSyncType);
+                type = selectedExportType.ToString();
+                manager = GetInstance(selectedExportType);
                 results = manager.Execute();
 
                 if (ApplicationConstants.ManualProcessDataSyncReport)
@@ -174,22 +173,17 @@ namespace MHN.Sync.Soln
 
             ManualProcess();
         }
-        private static IJobManager GetInstance(MHNSyncType type, List<string> fileLocations = null)
+        private static IJobManager GetInstance(MHNExportType type, List<string> fileLocations = null)
         {
             IJobManager manager = null;
             switch (type)
             {
-                case MHNSyncType.ProspectMember:
-                    manager = new ProspectFileManager(_prospectMemberRepository, _prospectRepository, _jwtHelperUtility);
+                case MHNExportType.EnrollmentExport:
+                    manager = new EnrollmentFileManager(_prospectMemberRepository, _enrollmentRequestRepository, _jwtHelperUtility);
                     break;
-                case MHNSyncType.Member:
-                    manager = new MemberFileManager(_prospectMemberRepository, _memberRepository, _jwtHelperUtility);
+                case MHNExportType.PTCExport:
+                    manager = new PTCFileManager(_prospectMemberRepository, _ptcRequestRepository, _jwtHelperUtility);
                     break;
-                case MHNSyncType.MemberAdditional:
-                    manager = new MemberAdditionalFileManager(_prospectMemberRepository, _memberAdditionalRepository, _jwtHelperUtility);
-                    break;
-
-                    
 
                     //case MocSyncType.Moc_Audit_CoverageStartDate:
                     //    manager = new CoverageDateCheckingManager(_memberEnrollmentInfoRepository, _memberHraRepository);
@@ -244,13 +238,12 @@ namespace MHN.Sync.Soln
             //}
         }
 
-        private static Dictionary<MHNSyncType, string> GetAllSyncTypes()
+        private static Dictionary<MHNExportType, string> GetAllExportTypes()
         {
-            return new Dictionary<MHNSyncType, string>
+            return new Dictionary<MHNExportType, string>
             {
-                { MHNSyncType.ProspectMember, "ProspectMember data Parse" },
-                { MHNSyncType.Member, "Member data Parse" },
-                { MHNSyncType.MemberAdditional, "Member Additional data Parse" },
+                { MHNExportType.PTCExport, "PTC Form data Export to PDF" },
+                { MHNExportType.EnrollmentExport, "Enrollment Form data Export to PDF" },
             };
         }
     }

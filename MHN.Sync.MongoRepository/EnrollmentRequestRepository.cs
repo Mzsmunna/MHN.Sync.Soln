@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MHN.Sync.MongoRepository
 {
-    public class EnrollmentRequestRepository : RepositoryBase //, IEnrollmentRequestRepository
+    public class EnrollmentRequestRepository : RepositoryBase , IEnrollmentRequestRepository
     {
         private static IMongoCollection<EnrollmentRequest> Collection { get; set; }
         private MongoDBCore<EnrollmentRequest> core;
@@ -119,6 +119,34 @@ namespace MHN.Sync.MongoRepository
 
         }
 
+        public EnrollmentRequest GetLatestEnrollmentRequest(string prosMemberRef)
+        {
+            try
+            {
+                var filter = Builders<EnrollmentRequest>.Filter.Eq("ProspectMemberDataRef", prosMemberRef);
+                return Collection.Find(filter).SortByDescending(x => x.CreatedOn).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public List<EnrollmentRequest> GetAllEnrollmentRequestById(string prosMemberRef)
+        {
+            try
+            {
+                var filter = Builders<EnrollmentRequest>.Filter.Eq("ProspectMemberDataRef", prosMemberRef);
+                return Collection.Find(filter).SortByDescending(x => x.CreatedOn).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public string Save(IEntity entity)
         {
             var returnVal = string.Empty;
@@ -175,6 +203,6 @@ namespace MHN.Sync.MongoRepository
             }
 
             return returnVal;
-        }       
+        }
     }
 }

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MHN.Sync.MongoRepository
 {
-    public class PTCRequestRepository : RepositoryBase //, IPTCRequestRepository
+    public class PTCRequestRepository : RepositoryBase , IPTCRequestRepository
     {
         private static IMongoCollection<PTCRequest> Collection { get; set; }
         private MongoDBCore<PTCRequest> core;
@@ -90,27 +90,40 @@ namespace MHN.Sync.MongoRepository
             return await Collection.Find(filter).Skip(currentPage * pageSize).Limit(pageSize).ToListAsync().ConfigureAwait(false);
         }
 
-        public int GetAllCount()
-        {
-            int count = 0;
-            try
-            {
-                var filter = BuildFilter(null);
-                count = Convert.ToInt32(Collection.Find(filter).Count());
-            }
-            catch (Exception ex)
-            {
-                //new ExceptionWrapper(ex).Handle();
-            }
-            return count;
-        }
-
         public PTCRequest GetPtcRequestDetailsById(string prosMemberRef)
         {
             try
             {
                 var filter = Builders<PTCRequest>.Filter.Eq("ProspectMemberDataRef", prosMemberRef);
                 return Collection.Find(filter).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public PTCRequest GetLatestPTCRequest(string prosMemberRef)
+        {
+            try
+            {
+                var filter = Builders<PTCRequest>.Filter.Eq("ProspectMemberDataRef", prosMemberRef);
+                return Collection.Find(filter).SortByDescending(x => x.CreatedOn).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public List<PTCRequest> GetAllPTCRequestById(string prosMemberRef)
+        {
+            try
+            {
+                var filter = Builders<PTCRequest>.Filter.Eq("ProspectMemberDataRef", prosMemberRef);
+                return Collection.Find(filter).SortByDescending(x => x.CreatedOn).ToList();
             }
             catch (Exception ex)
             {
@@ -175,6 +188,21 @@ namespace MHN.Sync.MongoRepository
             }
 
             return returnVal;
-        }       
+        }
+
+        public int GetAllCount()
+        {
+            int count = 0;
+            try
+            {
+                var filter = BuildFilter(null);
+                count = Convert.ToInt32(Collection.Find(filter).Count());
+            }
+            catch (Exception ex)
+            {
+                //new ExceptionWrapper(ex).Handle();
+            }
+            return count;
+        }
     }
 }

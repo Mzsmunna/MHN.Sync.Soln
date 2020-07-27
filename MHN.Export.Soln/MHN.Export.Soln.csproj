@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MHN.Export.Soln</RootNamespace>
+    <AssemblyName>MHN.Export.Soln</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\PdfGenerate\PdfGeneratorForEnrollment.cs" />
+    <Compile Include="Helpers\PdfGenerate\SectionPageNumber.cs" />
+    <Compile Include="Managers\FileGenerate\EnrollmentFileManager.cs" />
+    <Compile Include="Managers\FileGenerate\PTCFileManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Template\CarePlan-HEDIS-tmp.pdf" />
+    <None Include="Template\CarePlan-HEDIS.pdf" />
+    <None Include="Template\CarePlan-INT_REASSESS-tmp.pdf" />
+    <None Include="Template\CarePlan-INT_REASSESS.pdf" />
+    <None Include="Template\CarePlan-Spanish-HEDIS-tmp.pdf" />
+    <None Include="Template\CarePlan-Spanish-HEDIS.pdf" />
+    <None Include="Template\CarePlan-Spanish-INT_REASSESS -tmp.pdf" />
+    <None Include="Template\CarePlan-Spanish-INT_REASSESS-tmp.pdf" />
+    <None Include="Template\CarePlan-Spanish-INT_REASSESS.pdf" />
+    <None Include="Template\CarePlan-Spanish-TRANSITION-tmp.pdf" />
+    <None Include="Template\CarePlan-Spanish-TRANSITION.pdf" />
+    <None Include="Template\CarePlan-TRANSITION-tmp.pdf" />
+    <None Include="Template\CarePlan-TRANSITION.pdf" />
+    <None Include="Template\fonts\Gotham-Black.otf" />
+    <None Include="Template\fonts\Gotham-Bold.otf" />
+    <None Include="Template\fonts\Gotham-Book.otf" />
+    <None Include="Template\fonts\Gotham-ExtraLight.otf" />
+    <None Include="Template\fonts\Gotham-Ultra.otf" />
+    <None Include="Template\fonts\GothamNarrow-Black.otf" />
+    <None Include="Template\fonts\GothamNarrow-Bold.otf" />
+    <None Include="Template\fonts\GothamNarrow-Book.otf" />
+    <None Include="Template\fonts\GothamNarrow-Thin.otf" />
+    <None Include="Template\fonts\GothamXNarrow-Black.otf" />
+    <None Include="Template\fonts\GothamXNarrow-Bold.otf" />
+    <None Include="Template\fonts\GothamXNarrow-Book.otf" />
+    <None Include="Template\fonts\HelveNeuCon" />
+    <None Include="Template\fonts\HelveNeuRom" />
+    <None Include="Template\fonts\HelveticaNeue-Condensed" />
+    <None Include="Template\fonts\HelveticaNeue-Roman" />
+    <None Include="Template\fonts\MinionPro-Regular.otf" />
+    <None Include="Template\fonts\Varela.otf" />
+    <None Include="Template\Result.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cerebro.JWTAuthService.Services\Cerebro.JWTAuthService.Services.csproj">
+      <Project>{B422EC73-AE22-45B0-A16B-F353BC314BE1}</Project>
+      <Name>Cerebro.JWTAuthService.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Entity\MHN.Sync.Entity.csproj">
+      <Project>{A6C5CC27-CC8D-4789-8481-A2631C2CC3F8}</Project>
+      <Name>MHN.Sync.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Helper\MHN.Sync.Helper.csproj">
+      <Project>{49921d5d-7ef7-414b-bb22-46fed6970eae}</Project>
+      <Name>MHN.Sync.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Interface\MHN.Sync.Interface.csproj">
+      <Project>{A1D92462-343D-48BF-9640-D52AF196E477}</Project>
+      <Name>MHN.Sync.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.IOC\MHN.Sync.IOC.csproj">
+      <Project>{9568BF8C-8009-49E0-8DB3-17EDF6008A8E}</Project>
+      <Name>MHN.Sync.IOC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Jobs\MHN.Sync.Jobs.csproj">
+      <Project>{A6C47ABA-889E-4A60-B160-CD6042649698}</Project>
+      <Name>MHN.Sync.Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.MongoInterface\MHN.Sync.MongoInterface.csproj">
+      <Project>{4BEC2595-6F50-4CD8-89BB-598D9B5A0D11}</Project>
+      <Name>MHN.Sync.MongoInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Telemetry\MHN.Sync.Telemetry.csproj">
+      <Project>{8BA98CF0-A63F-4118-8616-6421BDA721B2}</Project>
+      <Name>MHN.Sync.Telemetry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MHN.Sync.Utility\MHN.Sync.Utility.csproj">
+      <Project>{C816E68A-1E39-4E2E-860B-E146A7AD2DA3}</Project>
+      <Name>MHN.Sync.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Template\bg-9.wmf" />
+    <Content Include="Template\Care-Providers.png" />
+    <Content Include="Template\Eating-habits.png" />
+    <Content Include="Template\Emotional-Health.png" />
+    <Content Include="Template\Equipment.png" />
+    <Content Include="Template\Exercise.png" />
+    <Content Include="Template\fonts\AdobeFnt19.lst" />
+    <Content Include="Template\health-well-being.png" />
+    <Content Include="Template\Healthcare.png" />
+    <Content Include="Template\icon-Care-Providers.png" />
+    <Content Include="Template\icon-Eating-habits.png" />
+    <Content Include="Template\icon-Emotional-Health.png" />
+    <Content Include="Template\icon-Equipment.png" />
+    <Content Include="Template\icon-Exercise.png" />
+    <Content Include="Template\icon-health-well-being.png" />
+    <Content Include="Template\icon-Healthcare.png" />
+    <Content Include="Template\icon-Medications-Equipment.png" />
+    <Content Include="Template\icon-Medications.png" />
+    <Content Include="Template\icon-Primary-Care-Provider.png" />
+    <Content Include="Template\icon-Primary-Care-Providers.png" />
+    <Content Include="Template\icon-Safety.png" />
+    <Content Include="Template\icon-Spanish-Care-Provider.png" />
+    <Content Include="Template\icon-Spanish-Care-Providers.png" />
+    <Content Include="Template\icon-Spanish-Eating-habits.png" />
+    <Content Include="Template\icon-Spanish-Emotional-Health.png" />
+    <Content Include="Template\icon-Spanish-Equipment.png" />
+    <Content Include="Template\icon-Spanish-Exercise.png" />
+    <Content Include="Template\icon-Spanish-health-well-being.png" />
+    <Content Include="Template\icon-Spanish-Healthcare.png" />
+    <Content Include="Template\icon-Spanish-Medications-Equipment.png" />
+    <Content Include="Template\icon-Spanish-Medications.png" />
+    <Content Include="Template\icon-Spanish-Primary-Care-Provider.png" />
+    <Content Include="Template\icon-Spanish-Primary-Care-Providers.png" />
+    <Content Include="Template\icon-Spanish-Safety.png" />
+    <Content Include="Template\icon-Spanish-Stress.png" />
+    <Content Include="Template\icon-Spanish-women-health.png" />
+    <Content Include="Template\icon-Stress.png" />
+    <Content Include="Template\icon-women-health.png" />
+    <Content Include="Template\Medications-Equipment.png" />
+    <Content Include="Template\Medications.png" />
+    <Content Include="Template\Primary-Care-Provider.png" />
+    <Content Include="Template\Safety.png" />
+    <Content Include="Template\Spanish-Care-Provider.png" />
+    <Content Include="Template\Spanish-Care-Providers.png" />
+    <Content Include="Template\Spanish-Eating-habits.png" />
+    <Content Include="Template\Spanish-Emotional-Health.png" />
+    <Content Include="Template\Spanish-Equipment.png" />
+    <Content Include="Template\Spanish-Exercise.png" />
+    <Content Include="Template\Spanish-health-well-being.png" />
+    <Content Include="Template\Spanish-Healthcare.png" />
+    <Content Include="Template\Spanish-Medications-Equipment.png" />
+    <Content Include="Template\Spanish-Medications.png" />
+    <Content Include="Template\Spanish-Primary-Care-Provider.png" />
+    <Content Include="Template\Spanish-Primary-Care-Providers.png" />
+    <Content Include="Template\Spanish-Safety.png" />
+    <Content Include="Template\Spanish-Stress.png" />
+    <Content Include="Template\Spanish-women-health.png" />
+    <Content Include="Template\Stress.png" />
+    <Content Include="Template\women-health.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

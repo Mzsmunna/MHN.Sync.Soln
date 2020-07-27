@@ -12,16 +12,18 @@ namespace MHN.Sync.Entity.MongoEntity
         public string ProspectMemberDataRef { get; set; }
         public string AgentId { get; set; }
         public string AgentName { get; set; }
-        public string PreferredOutreachDay { get; set; }
-        public string PreferredOutreachTime { get; set; }
-        public string PreferredLanguage { get; set; }
+        public List<string> PreferredContactMethod { get; set; }
+        public List<string> PreferredOutReachDay { get; set; }
+        public List<string> PreferredOutReachTime { get; set; }
+        public List<string> PreferredLanguage { get; set; }
         public string SpecificTimeOrRangeNoted { get; set; }
-        public string SpecificDateNoted { get; set; }
+        public DateTime? SpecificDateNoted { get; set; }
         public string OtherLanguage { get; set; }
         public string HeardAboutUsThrough { get; set; }
         public string AdditionalComments { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ExpiredOn { get; set; }
+        public string Source { get; set; }
     }
 }

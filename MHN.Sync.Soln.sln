@@ -43,6 +43,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSyncServices", "DataSyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MHN.Sync.Interface", "MHN.Sync.Interface\MHN.Sync.Interface.csproj", "{A1D92462-343D-48BF-9640-D52AF196E477}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataExportServices", "DataExportServices", "{39B1E7E8-1D2F-4BD4-A5F1-D1DCFE7DD4D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MHN.Export.Soln", "MHN.Export.Soln\MHN.Export.Soln.csproj", "{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,12 +129,17 @@ Global
 		{A1D92462-343D-48BF-9640-D52AF196E477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1D92462-343D-48BF-9640-D52AF196E477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1D92462-343D-48BF-9640-D52AF196E477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{37AC814B-F861-418D-B234-689077FBE719} = {A3879DD8-86C2-4EB8-B73A-4878FA42EA1C}
+		{AD1B6E6A-CA3F-4294-AA39-7F0369ACCEF2} = {39B1E7E8-1D2F-4BD4-A5F1-D1DCFE7DD4D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9DEA264-9F19-464D-8FAE-C69691AE3C74}

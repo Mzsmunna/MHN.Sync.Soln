@@ -10,7 +10,7 @@ namespace MHN.Sync.Entity.MongoEntity
     {
         public string Id { get; set; }
         public string ProspectMemberDataRef { get; set; }
-        public string EnrollInPlan { get; set; }
+        public List<string> EnrollInPlan { get; set; }
         public string EnrollPCPName { get; set; }
         public string EnrollPCPId { get; set; }
         public string MedicareCardName { get; set; }
@@ -19,24 +19,35 @@ namespace MHN.Sync.Entity.MongoEntity
         public string MedicarePartB { get; set; }
         public string PremiumPaymentOption { get; set; }
         public string MonthlyBenefitFrom { get; set; }
-        public string HaveESRD { get; set; }
-        public string HaveOtherDrugCoverage { get; set; }
+        public bool HaveESRD { get; set; }
+        public bool HaveOtherDrugCoverage { get; set; }
         public DrugCoverage DrugCoverage { get; set; }
         public bool IsLongTermCareResident { get; set; }
         public LongTermCareResident LongTermCareResident { get; set; }
         public bool IsEnrolledStateMedicaidProgram { get; set; }
         public string MedicaidNumber { get; set; }
         public bool IsSpouseWork { get; set; }
-        public string PreferedLanguage { get; set; }
+        public List<string> PreferedLanguage { get; set; }
         public AuthorizedRepresentative AuthorizedRepresentative { get; set; }
+        public string Signature { get; set; }
+
+        public DateTime? TodayDate { get; set; }
         public string AgentName { get; set; }
         public string AgentId { get; set; }
-        public string EffectiveDateCoverage { get; set; }
+
+        public DateTime? EffectiveDateCoverage { get; set; }
         public string EventId { get; set; }
-        public string PreferredDayOutreach { get; set; }
+        public List<PreferredDayOutreach> PreferredDayOutreach { get; set; }
 
         //public bool IsActive { get; set; }
+        public string EnrollmentFormNo { get; set; }
         public DateTime CreatedOn { get; set; }
+    }
+
+    public class PreferredDayOutreach
+    {
+        public string QuestionId { get; set; }
+        public string DateWithQuestion { get; set; }
     }
 
     public class DrugCoverage

@@ -1,0 +1,436 @@
+%!Adobe-FontList 1.19
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-Black
+FamilyName:Gotham
+StyleName:Black
+MenuName:Gotham Black
+StyleBits:0
+WeightClass:450
+WidthClass:5
+AngleClass:0
+FullName:Gotham Black
+WritingScript:Roman
+OutlineFileName:\Gotham-Black.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:165580
+FileModTime:1221154241
+NameArray:0,Mac,4,Gotham Black
+NameArray:0,Win,1,Gotham Black
+NameArray:0,Win,16,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-Bold
+FamilyName:Gotham
+StyleName:Bold
+MenuName:Gotham Bold
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Gotham Bold
+WritingScript:Roman
+OutlineFileName:\Gotham-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:157328
+FileModTime:1221154318
+NameArray:0,Mac,4,Gotham Bold
+NameArray:0,Win,1,Gotham Bold
+NameArray:0,Win,16,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-Book
+FamilyName:Gotham
+StyleName:Book
+MenuName:Gotham Book
+StyleBits:0
+WeightClass:325
+WidthClass:5
+AngleClass:0
+FullName:Gotham Book
+WritingScript:Roman
+OutlineFileName:\Gotham-Book.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:158964
+FileModTime:1221154310
+NameArray:0,Mac,4,Gotham Book
+NameArray:0,Win,1,Gotham Book
+NameArray:0,Win,16,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-ExtraLight
+FamilyName:Gotham
+StyleName:Extra Light
+MenuName:Gotham Extra Light
+StyleBits:0
+WeightClass:275
+WidthClass:5
+AngleClass:0
+FullName:Gotham Extra Light
+WritingScript:Roman
+OutlineFileName:\Gotham-ExtraLight.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:161604
+FileModTime:1221154283
+NameArray:0,Mac,4,Gotham Extra Light
+NameArray:0,Win,1,Gotham Extra Light
+NameArray:0,Win,16,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-Ultra
+FamilyName:Gotham
+StyleName:Ultra
+MenuName:Gotham Ultra
+StyleBits:0
+WeightClass:500
+WidthClass:5
+AngleClass:0
+FullName:Gotham Ultra
+WritingScript:Roman
+OutlineFileName:\Gotham-Ultra.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:161252
+FileModTime:1221154267
+NameArray:0,Mac,4,Gotham Ultra
+NameArray:0,Win,1,Gotham Ultra
+NameArray:0,Win,16,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamNarrow-Black
+FamilyName:Gotham Narrow
+StyleName:Black
+MenuName:Gotham Narrow Black
+StyleBits:0
+WeightClass:450
+WidthClass:3
+AngleClass:0
+FullName:Gotham Narrow Black
+WritingScript:Roman
+OutlineFileName:\GothamNarrow-Black.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:39984
+FileModTime:1350059430
+NameArray:0,Mac,4,Gotham Narrow Black
+NameArray:0,Win,1,Gotham Narrow Black
+NameArray:0,Win,16,Gotham Narrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamNarrow-Bold
+FamilyName:Gotham Narrow
+StyleName:Bold
+MenuName:Gotham Narrow Bold
+StyleBits:0
+WeightClass:400
+WidthClass:3
+AngleClass:0
+FullName:Gotham Narrow Bold
+WritingScript:Roman
+OutlineFileName:\GothamNarrow-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:59044
+FileModTime:1350059430
+NameArray:0,Mac,4,Gotham Narrow Bold
+NameArray:0,Win,1,Gotham Narrow Bold
+NameArray:0,Win,16,Gotham Narrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamNarrow-Book
+FamilyName:Gotham Narrow
+StyleName:Book
+MenuName:Gotham Narrow Book
+StyleBits:0
+WeightClass:325
+WidthClass:3
+AngleClass:0
+FullName:Gotham Narrow Book
+WritingScript:Roman
+OutlineFileName:\GothamNarrow-Book.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:57764
+FileModTime:1350059430
+NameArray:0,Mac,4,Gotham Narrow Book
+NameArray:0,Win,1,Gotham Narrow Book
+NameArray:0,Win,16,Gotham Narrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamNarrow-Thin
+FamilyName:Gotham Narrow
+StyleName:Thin
+MenuName:Gotham Narrow Thin
+StyleBits:0
+WeightClass:250
+WidthClass:3
+AngleClass:0
+FullName:Gotham Narrow Thin
+WritingScript:Roman
+OutlineFileName:\GothamNarrow-Thin.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:37388
+FileModTime:1350059430
+NameArray:0,Mac,4,Gotham Narrow Thin
+NameArray:0,Win,1,Gotham Narrow Thin
+NameArray:0,Win,16,Gotham Narrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamXNarrow-Black
+FamilyName:Gotham XNarrow
+StyleName:Black
+MenuName:Gotham XNarrow Black
+StyleBits:0
+WeightClass:450
+WidthClass:3
+AngleClass:0
+FullName:Gotham XNarrow Black
+WritingScript:Roman
+OutlineFileName:\GothamXNarrow-Black.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:40000
+FileModTime:1350059446
+NameArray:0,Mac,4,Gotham XNarrow Black
+NameArray:0,Win,1,Gotham XNarrow Black
+NameArray:0,Win,16,Gotham XNarrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamXNarrow-Bold
+FamilyName:Gotham XNarrow
+StyleName:Bold
+MenuName:Gotham XNarrow Bold
+StyleBits:0
+WeightClass:400
+WidthClass:3
+AngleClass:0
+FullName:Gotham XNarrow Bold
+WritingScript:Roman
+OutlineFileName:\GothamXNarrow-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:57720
+FileModTime:1350059446
+NameArray:0,Mac,4,Gotham XNarrow Bold
+NameArray:0,Win,1,Gotham XNarrow Bold
+NameArray:0,Win,16,Gotham XNarrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:GothamXNarrow-Book
+FamilyName:Gotham XNarrow
+StyleName:Book
+MenuName:Gotham XNarrow Book
+StyleBits:0
+WeightClass:325
+WidthClass:3
+AngleClass:0
+FullName:Gotham XNarrow Book
+WritingScript:Roman
+OutlineFileName:\GothamXNarrow-Book.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:57272
+FileModTime:1350059446
+NameArray:0,Mac,4,Gotham XNarrow Book
+NameArray:0,Win,1,Gotham XNarrow Book
+NameArray:0,Win,16,Gotham XNarrow
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:HelveticaNeue-Condensed
+FamilyName:Helvetica Neue
+StyleName:57 Condensed
+MenuName:HelveticaNeue Condensed
+StyleBits:0
+WeightClass:400
+WidthClass:3
+AngleClass:0
+FullName:Helvetica 57 Condensed
+WritingScript:Roman
+OutlineFileName:\HelveNeuCon
+DataFormat:POSTResource
+UsesStandardEncoding:yes
+isCFF:no
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:29458
+FileModTime:660294476
+DesignSize:-1
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:HelveticaNeue-Roman
+FamilyName:Helvetica Neue
+StyleName:55 Roman
+MenuName:Helvetica 55 Roman
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Helvetica 55 Roman
+WritingScript:Roman
+OutlineFileName:\HelveNeuRom
+DataFormat:POSTResource
+UsesStandardEncoding:yes
+isCFF:no
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:28152
+FileModTime:648812199
+DesignSize:-1
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Suitcase
+FontName:HelveticaNeue-Condensed
+OutlineFileName:\HelveticaNeue-Condensed
+ResourceID:5796
+MacStyle:0
+FileLength:25892
+FileModTime:1444269143
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Suitcase
+FontName:HelveticaNeue-Roman
+OutlineFileName:\HelveticaNeue-Roman
+ResourceID:14770
+MacStyle:0
+FileLength:29191
+FileModTime:1511213359
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:235436
+FileModTime:1246295742
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Varela
+FamilyName:Varela
+StyleName:Regular
+MenuName:Varela
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Varela
+WritingScript:Roman
+OutlineFileName:\Varela.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:133984
+FileModTime:1507720864
+NameArray:0,Mac,4,Varela
+NameArray:0,Win,1,Varela
+%EndFont
+

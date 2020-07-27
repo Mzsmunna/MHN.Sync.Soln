@@ -49,10 +49,12 @@
     <Compile Include="BASE\IConfigService.cs" />
     <Compile Include="BASE\IDatabaseContext.cs" />
     <Compile Include="BASE\IDatabaseContextContainer.cs" />
+    <Compile Include="IEnrollmentRequestRepository.cs" />
     <Compile Include="IMemberRepository.cs" />
     <Compile Include="IProspectMemberRepository.cs" />
     <Compile Include="IMemberAdditionalRepository.cs" />
     <Compile Include="IProspectRepository.cs" />
+    <Compile Include="IPTCRequestRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

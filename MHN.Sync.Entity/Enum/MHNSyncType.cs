@@ -12,4 +12,10 @@ namespace MHN.Sync.Entity.Enum
         Member,
         MemberAdditional
     }
+
+    public enum MHNExportType
+    {
+        PTCExport,
+        EnrollmentExport
+    }
 }
